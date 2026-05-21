@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PDF Generado</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .aviso {
+            display: none;
+            background: #fff8e1;
+            border: 2px solid #c79b00;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            text-align: left;
+            color: #444;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        .aviso strong {
+            display: block;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .paso {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 8px 0;
+            font-weight: bold;
+        }
+        .paso span {
+            background: #c79b00;
+            color: white;
+            border-radius: 50%;
+            width: 26px;
+            height: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+        .btn-wa {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 15px;
+            background: linear-gradient(90deg, #25D366, #128C7E);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            text-align: center;
+            text-decoration: none;
+            box-sizing: border-box;
+        }
+        .btn-wa:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(37,211,102,0.4);
+        }
+    </style>
+</head>
+
+<body class="fondo">
+
+<div class="contenedor">
+
+    <h1>PDF Generado ✨</h1>
+
+    <iframe
+        src="/pdf/{{ nombre }}"
+        width="100%"
+        height="400px"
+        style="border:none;border-radius:20px;"
+    ></iframe>
+
+    <a href="/pdf/{{ nombre }}" download="{{ nombre }}">
+        <button>⬇️ DESCARGAR PDF</button>
+    </a>
+
+    <a id="btnWA" class="btn-wa" href="#">
+        📲 ENVIAR POR WHATSAPP
+    </a>
+
+    <div class="aviso" id="aviso">
+        <strong>✅ ¡Ahora adjuntá el PDF en WhatsApp!</strong>
+        <div class="paso"><span>1</span> Se abre WhatsApp — elegí el contacto</div>
+        <div class="paso"><span>2</span> Tocá el clip 📎 para adjuntar</div>
+        <div class="paso"><span>3</span> Elegí <strong>Documento</strong></div>
+        <div class="paso"><span>4</span> Buscá el PDF en <strong>Descargas</strong></div>
+        <div class="paso"><span>5</span> ¡Envialo! 🚀</div>
+    </div>
+
+    <a href="/pedido">
+        <button>VOLVER</button>
+    </a>
+
+</div>
+
+<script>
+    var vendedor = "{{ pedido.get('vendedor', '') }}";
+    var cliente  = "{{ pedido.get('cliente', '') }}";
+    var zona     = "{{ pedido.get('zona', '') }}";
+    var fechaEnt = "{{ pedido.get('fecha_entrega', '') }}";
+    var detalle  = "{{ pedido.get('detalle_productos', '') | replace('\n', '\\n') }}";
+
+    var mensaje =
+        "📋 NUEVO PEDIDO - DF SYSTEM\n" +
+        "──────────────────\n" +
+        "👤 Vendedor: " + vendedor + "\n" +
+        "🏪 Cliente: "  + cliente  + "\n" +
+        "📍 Zona: "     + zona     + "\n" +
+        "📅 Fecha entrega: " + fechaEnt + "\n" +
+        "──────────────────\n" +
+        "📦 Productos:\n" + detalle +
+        "──────────────────\n" +
+        "📎 Adjunto el PDF del pedido";
+
+    document.getElementById("btnWA").href =
+        "https://wa.me/?text=" + encodeURIComponent(mensaje);
+
+    document.getElementById("btnWA").onclick = function() {
+        document.getElementById("aviso").style.display = "block";
+        document.getElementById("aviso").scrollIntoView({behavior: "smooth"});
+    };
+</script>
+
+</body>
+</html>

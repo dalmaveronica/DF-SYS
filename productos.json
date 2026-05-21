@@ -1,0 +1,586 @@
+[
+    {
+        "codigo": "55070-11",
+        "nombre": "Raviol Ricota"
+    },
+    {
+        "codigo": "55070-12",
+        "nombre": "Raviol Ricota Congelado"
+    },
+    {
+        "codigo": "55082-11",
+        "nombre": "Raviol verdura"
+    },
+    {
+        "codigo": "55082-12",
+        "nombre": "Raviol verdura congelado"
+    },
+    {
+        "codigo": "55064-11",
+        "nombre": "Raviol pollo con verdura"
+    },
+    {
+        "codigo": "55064-12",
+        "nombre": "Raviol pollo con verdura congelado"
+    },
+    {
+        "codigo": "55080-11",
+        "nombre": "Raviol verdura-masa espinaca"
+    },
+    {
+        "codigo": "55080-12",
+        "nombre": "Raviol verdura-masa espinaca congelado"
+    },
+    {
+        "codigo": "55050-11",
+        "nombre": "Raviol calabaza/queso"
+    },
+    {
+        "codigo": "55050-12",
+        "nombre": "Raviol calaba/queso congelado"
+    },
+    {
+        "codigo": "55066-11",
+        "nombre": "Raviol ricota c/almendras"
+    },
+    {
+        "codigo": "55066-12",
+        "nombre": "Raviol ricota c/almendras congelado"
+    },
+    {
+        "codigo": "55062-11",
+        "nombre": "Raviol a los 4 quesos"
+    },
+    {
+        "codigo": "55062-12",
+        "nombre": "Raviol a los 4 quesos congelados"
+    },
+    {
+        "codigo": "55074-11",
+        "nombre": "Raviol salmon"
+    },
+    {
+        "codigo": "55074-12",
+        "nombre": "Raviol salmon congelado"
+    },
+    {
+        "codigo": "55073-11",
+        "nombre": "Raviol salmon y langostinos"
+    },
+    {
+        "codigo": "55073-12",
+        "nombre": "Raviol salmon y langostino congelados"
+    },
+    {
+        "codigo": "55058-11",
+        "nombre": "Raviol ciervo"
+    },
+    {
+        "codigo": "55058-12",
+        "nombre": "Raviol ciervo Congelado"
+    },
+    {
+        "codigo": "55060-11",
+        "nombre": "Raviol cordero"
+    },
+    {
+        "codigo": "55060-12",
+        "nombre": "Raviol cordero congelado"
+    },
+    {
+        "codigo": "55078-11",
+        "nombre": "Raviol Trucha"
+    },
+    {
+        "codigo": "55082-12",
+        "nombre": "Raviol Trucha congelado"
+    },
+    {
+        "codigo": "55131-11",
+        "nombre": "Sorrentinos de verdura masa espinaca"
+    },
+    {
+        "codigo": "55131-12",
+        "nombre": "Sorrentinos de verdura masa espinaca congelado"
+    },
+    {
+        "codigo": "55116-11",
+        "nombre": "Sorrentinos ricota c/almendras"
+    },
+    {
+        "codigo": "55116-12",
+        "nombre": "Sorrentinos ricota c/almendras congelado"
+    },
+    {
+        "codigo": "55108-11",
+        "nombre": "Sorrentinos jamon y muzzarella "
+    },
+    {
+        "codigo": "55108-12",
+        "nombre": "Sorrentinos jamon y muzzarella congelado "
+    },
+    {
+        "codigo": "55089-11",
+        "nombre": "Sorrentinos calabaza y queso"
+    },
+    {
+        "codigo": "55089-12",
+        "nombre": "Sorrentinos calabaza y queso congelado"
+    },
+    {
+        "codigo": "55090-11",
+        "nombre": "Sorrentinos capresse"
+    },
+    {
+        "codigo": "55090-12",
+        "nombre": "Sorrentinos capresse congelado"
+    },
+    {
+        "codigo": "55103-11",
+        "nombre": "Sorrentinos Mediterraneo"
+    },
+    {
+        "codigo": "55103-12",
+        "nombre": "Sorrentinos Mediterraneo congelado"
+    },
+    {
+        "codigo": "55129-11",
+        "nombre": "Sorrentino de hongos de pino-aceite de trufas"
+    },
+    {
+        "codigo": "55129-12",
+        "nombre": "Sorrentino de hongos de pino-aceite de trufas congelado"
+    },
+    {
+        "codigo": "55141-11",
+        "nombre": "Sorrentinos queso azul-apio-ciruela y nuez"
+    },
+    {
+        "codigo": "55141-12",
+        "nombre": "Sorrentinos queso azul-apio-ciruela y nuez congelado"
+    },
+    {
+        "codigo": "55113-11",
+        "nombre": "Sorrentino muzzarella-panceta y ciruela"
+    },
+    {
+        "codigo": "55113-12",
+        "nombre": "Sorrentino muzzarella-panceta y ciruela congelado"
+    },
+    {
+        "codigo": "55095-11",
+        "nombre": "Sorrentino ciervo"
+    },
+    {
+        "codigo": "55095-12",
+        "nombre": "Sorrentino ciervo congelado"
+    },
+    {
+        "codigo": "55099-11",
+        "nombre": "Sorrentino cordero"
+    },
+    {
+        "codigo": "55099-12",
+        "nombre": "Sorrentino cordero congelado"
+    },
+    {
+        "codigo": "55084-11",
+        "nombre": "Sorrentino 4 quesos"
+    },
+    {
+        "codigo": "55084-12",
+        "nombre": "Sorrentino 4 quesos congelado"
+    },
+    {
+        "codigo": "55121-11",
+        "nombre": "Sorrentino salmon"
+    },
+    {
+        "codigo": "55121-12",
+        "nombre": "Sorrentino salmon congelado"
+    },
+    {
+        "codigo": "55118-11",
+        "nombre": "Sorrentinos salmon c/tinta calamar"
+    },
+    {
+        "codigo": "55118-11",
+        "nombre": "Sorrentinos salmon c/tinta calamar congelado"
+    },
+    {
+        "codigo": "55125-11",
+        "nombre": "Sorrentino de trucha"
+    },
+    {
+        "codigo": "55029-11",
+        "nombre": "Panzotti calabaza y queso"
+    },
+    {
+        "codigo": "55029-12",
+        "nombre": "Panzotti calabaza y queso congelado"
+    },
+    {
+        "codigo": "55050-11",
+        "nombre": "Panzotti ricota c/almendras"
+    },
+    {
+        "codigo": "55050-12",
+        "nombre": "Panzotti ricota c/almendras congelado"
+    },
+    {
+        "codigo": "55046-11",
+        "nombre": "Panzotti pollo y verdeo"
+    },
+    {
+        "codigo": "55046-12",
+        "nombre": "Panzotti pollo y verdeo congelado"
+    },
+    {
+        "codigo": "55044-11",
+        "nombre": "Panzotti parmesano y nuez"
+    },
+    {
+        "codigo": "55044-12",
+        "nombre": "Panzotti parmesano y nuez congelado"
+    },
+    {
+        "codigo": "55053-11",
+        "nombre": "Panzotti Salmon"
+    },
+    {
+        "codigo": "55053-12",
+        "nombre": "Panzotti Salmon congelado"
+    },
+    {
+        "codigo": "55039-11",
+        "nombre": "Panzotti cordero"
+    },
+    {
+        "codigo": "55039-12",
+        "nombre": "Panzotti cordero congelado"
+    },
+    {
+        "codigo": "55054-11",
+        "nombre": "Panzotti trucha"
+    },
+    {
+        "codigo": "55054-12",
+        "nombre": "Panzotti trucha congelado"
+    },
+    {
+        "codigo": "55034-11",
+        "nombre": "Panzotti ciervo"
+    },
+    {
+        "codigo": "55034-12",
+        "nombre": "Panzotti ciervo congelado"
+    },
+    {
+        "codigo": "55052-11",
+        "nombre": "Panzotti salmon y langostino"
+    },
+    {
+        "codigo": "55052-12",
+        "nombre": "Panzotti salmon y langostino congelado"
+    },
+    {
+        "codigo": "55015-11",
+        "nombre": "Ñoquis papa xkg"
+    },
+    {
+        "codigo": "55015-12",
+        "nombre": "Ñoquis papa xkg congelado"
+    },
+    {
+        "codigo": "55014-11",
+        "nombre": "Ñoquis papa x 500gr"
+    },
+    {
+        "codigo": "55014-12",
+        "nombre": "Ñoquis papa x 500gr congelados"
+    },
+    {
+        "codigo": "55013-11",
+        "nombre": "Ñoquis espinaca xkg"
+    },
+    {
+        "codigo": "55013-12",
+        "nombre": "Ñoquis espinaca xkg congelado"
+    },
+    {
+        "codigo": "55012-11",
+        "nombre": "Ñoquis espinaca x500gr"
+    },
+    {
+        "codigo": "55012-12",
+        "nombre": "Ñoquis espinaca x500gr congelados"
+    },
+    {
+        "codigo": "55011-11",
+        "nombre": "Ñoquis calabaza xkg"
+    },
+    {
+        "codigo": "55011-12",
+        "nombre": "Ñoquis calabaza xkg congelados"
+    },
+    {
+        "codigo": "55010-11",
+        "nombre": "Ñoquis calabaza x500gr"
+    },
+    {
+        "codigo": "55010-12",
+        "nombre": "Ñoquis calabaza x500gr congelados"
+    },
+    {
+        "codigo": "55150-11",
+        "nombre": "Tallarines al huevo fino x kg"
+    },
+    {
+        "codigo": "55150-12",
+        "nombre": "Tallarin al huevo fino x kg congelado"
+    },
+    {
+        "codigo": "55149-11",
+        "nombre": "Tallarin al huevo fino x500gr "
+    },
+    {
+        "codigo": "55149-12",
+        "nombre": "Tallarin al huevo fino  x500gr congelado"
+    },
+    {
+        "codigo": "55148-11",
+        "nombre": "Tallarin al huevo cinta xkg"
+    },
+    {
+        "codigo": "55148-12",
+        "nombre": "Tallarin al huevo cinta xkg congelado "
+    },
+    {
+        "codigo": "55147-11",
+        "nombre": "Tallarin al huevo cinta x500gr"
+    },
+    {
+        "codigo": "55147-12",
+        "nombre": "Tallarin al huevo cinta x500gr congelado"
+    },
+    {
+        "codigo": "55146-11",
+        "nombre": "Tallarin al huevo ancho xkg"
+    },
+    {
+        "codigo": "55146-12",
+        "nombre": "Tallarin al huevo ancho xkg congelado"
+    },
+    {
+        "codigo": "55145-11",
+        "nombre": "Tallarin al huevo ancho x500gr"
+    },
+    {
+        "codigo": "55145-12",
+        "nombre": "Tallarin al huevo ancho x500gr congelado"
+    },
+    {
+        "codigo": "55163-11",
+        "nombre": "Tallarin espinaca fino"
+    },
+    {
+        "codigo": "55163-12",
+        "nombre": "Tallarin espinaca fino congelado"
+    },
+    {
+        "codigo": "55159-11",
+        "nombre": "Tallarin espinaca cinta"
+    },
+    {
+        "codigo": "55159-12",
+        "nombre": "Tallarin espinaca cinta congelado"
+    },
+    {
+        "codigo": "55140-11",
+        "nombre": "Tallarin espinaca ancho"
+    },
+    {
+        "codigo": "55140-12",
+        "nombre": "Tallarin espinaca ancho congelado"
+    },
+    {
+        "codigo": "55165-11",
+        "nombre": "Tallarin morron ancho"
+    },
+    {
+        "codigo": "55165-12",
+        "nombre": "Tallarin morron ancho congelado"
+    },
+    {
+        "codigo": "55151-11",
+        "nombre": "Tallarin morron fino"
+    },
+    {
+        "codigo": "55151-12",
+        "nombre": "Tallarin morron fino congelado"
+    },
+    {
+        "codigo": "55168-11",
+        "nombre": "Tallarin morron cinta"
+    },
+    {
+        "codigo": "55168-12",
+        "nombre": "Tallarin morron cinta congelado"
+    },
+    {
+        "codigo": "55247-11",
+        "nombre": "Fucciles espinaca"
+    },
+    {
+        "codigo": "55006-11",
+        "nombre": "Fucciles"
+    },
+    {
+        "codigo": "55004-11",
+        "nombre": "Fideos rellenos de verdra"
+    },
+    {
+        "codigo": "55003",
+        "nombre": "Fideos rellenos de ricota con jamon"
+    },
+    {
+        "codigo": "55176-11",
+        "nombre": "Tapa empanada Media Horno"
+    },
+    {
+        "codigo": "55173-11",
+        "nombre": "Tapa Empanada Media Freir"
+    },
+    {
+        "codigo": "55174-11",
+        "nombre": "Tapa Empanada Grande Horno"
+    },
+    {
+        "codigo": "55171-11",
+        "nombre": "Tapa empanada Grande Freir"
+    },
+    {
+        "codigo": "55169-11",
+        "nombre": "Tapa Empanada Copetin Horno"
+    },
+    {
+        "codigo": "55172-11",
+        "nombre": "Tapa Empanada Copetin Freir"
+    },
+    {
+        "codigo": "55182-11",
+        "nombre": "Pascualina Redonda"
+    },
+    {
+        "codigo": "55181-11",
+        "nombre": "Pascualina Rectangular"
+    },
+    {
+        "codigo": "55187-11",
+        "nombre": "Tapa Pastelito"
+    },
+    {
+        "codigo": "55179-11",
+        "nombre": "Tapa Lasagna Precocida"
+    },
+    {
+        "codigo": "55183-11",
+        "nombre": "Tapa Especial Masa Philo"
+    },
+    {
+        "codigo": "55027-11",
+        "nombre": "Panqueques Artesanales"
+    },
+    {
+        "codigo": "55178-11",
+        "nombre": "Tapa para tarta x17 cm"
+    },
+    {
+        "codigo": "55008-11",
+        "nombre": "Lasagna Verdura y Jamon"
+    },
+    {
+        "codigo": "55007-11",
+        "nombre": "Lasagna Choclo"
+    },
+    {
+        "codigo": "55002-11",
+        "nombre": "Canelones de Verdura"
+    },
+    {
+        "codigo": "55001-11",
+        "nombre": "Canelones de Ricota y Jamon"
+    },
+    {
+        "codigo": "5560413",
+        "nombre": "CHIPA X500"
+    },
+    {
+        "codigo": "55178-11",
+        "nombre": "Tapa Especial x21cm"
+    },
+    {
+        "codigo": "10135-22",
+        "nombre": "Pan Lactal Grande sin tacc"
+    },
+    {
+        "codigo": "10111-22",
+        "nombre": "Medialuna x3"
+    },
+    {
+        "codigo": "100176-22",
+        "nombre": "Empanada Verdura x3"
+    },
+    {
+        "codigo": "100177-22",
+        "nombre": "Empanada Carne x3"
+    },
+    {
+        "codigo": "10091-22",
+        "nombre": "Disco empanada x12"
+    },
+    {
+        "codigo": "10174-22",
+        "nombre": "Sorrentinos x9 Verdura"
+    },
+    {
+        "codigo": "10171-22",
+        "nombre": "Sorrentino x9 Calabaza y Queso Azul"
+    },
+    {
+        "codigo": "10172-22",
+        "nombre": "Sorrentino x9 jamon y Queso sin tacc"
+    },
+    {
+        "codigo": "10120-22",
+        "nombre": "Ñoquis sin Tacc"
+    },
+    {
+        "codigo": "10187-22",
+        "nombre": "Empanada x3 Choclo"
+    },
+    {
+        "codigo": "10190-22",
+        "nombre": "Tarta de jamon y Queso"
+    },
+    {
+        "codigo": "10191-22",
+        "nombre": "Tarta de choclo"
+    },
+    {
+        "codigo": "10196-22",
+        "nombre": "Tarta de Espinaca"
+    },
+    {
+        "codigo": "10197-22",
+        "nombre": "Tarta Calabaza"
+    },
+    {
+        "codigo": "10199-22",
+        "nombre": "Pan Integral Con Semillas"
+    },
+    {
+        "codigo": "55082-11",
+        "nombre": "Raviol verdura"
+    }
+]
