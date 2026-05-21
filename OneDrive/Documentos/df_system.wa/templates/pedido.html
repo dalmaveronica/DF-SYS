@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>DF SYSTEM</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="fondo">
+
+    <div class="top-bar">
+        <div class="top-vacio"></div>
+        <div class="frase-superior">
+            ✨ {{ frase }}
+        </div>
+        <div class="logout">
+            <a href="/logout">Salir</a>
+        </div>
+    </div>
+
+    <div class="contenedor">
+
+        <h1>DF SYSTEM ✨</h1>
+
+        <p class="fecha">{{ fecha }}</p>
+
+        <form action="/generar" method="POST">
+
+            <input type="text" name="cliente" placeholder="Cliente" required>
+            <input type="text" name="razon" placeholder="Razón Social / RFC (Opcional)">
+            <input type="text" name="zona" placeholder="Zona">
+            <textarea name="nota" placeholder="Nota adicional..." rows="4"></textarea>
+            <input type="date" name="fecha_entrega">
+
+            <h2>Productos</h2>
+
+            <div id="productos">
+                <div class="fila">
+                    <input list="listaProductos" name="producto[]" placeholder="Buscar producto" required>
+                    <input type="text" name="cantidad[]" placeholder="Cantidad" required>
+                </div>
+            </div>
+
+            <datalist id="listaProductos">
+                {% for producto in productos %}
+                    <option value="{{ producto.codigo }} - {{ producto.nombre }}">
+                {% endfor %}
+            </datalist>
+
+            <button type="button" onclick="agregarProducto()">+ Agregar Producto</button>
+            <button type="submit">Generar Pedido</button>
+
+        </form>
+
+    </div>
+
+    <script>
+        function agregarProducto() {
+            let contenedor = document.getElementById("productos");
+            let fila = document.createElement("div");
+            fila.className = "fila";
+            fila.innerHTML = `
+                <input list="listaProductos" name="producto[]" placeholder="Buscar producto" required>
+                <input type="text" name="cantidad[]" placeholder="Cantidad" required>
+            `;
+            contenedor.appendChild(fila);
+        }
+    </script>
+
+</body>
+</html>
+
