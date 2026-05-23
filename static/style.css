@@ -8,58 +8,85 @@ body {
 .fondo {
     min-height: 100vh;
     width: 100%;
-    background: linear-gradient(
-        135deg,
-        #ffd6ec,
-        #ffe3f1,
-        #fff0f7
-    );
+    background: linear-gradient(135deg, #ffd6ec, #ffe3f1, #fff0f7);
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.header {
+/* ── DAL FRANCO flotante a los costados ── */
+.dal-izq,
+.dal-der {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    writing-mode: vertical-rl;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: #e8a0c0;
+    text-shadow:
+        0 0 8px #ff7eb6,
+        0 0 18px #ff7eb6,
+        0 0 35px #ffb3d9;
+    animation: flotar 3s ease-in-out infinite;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+}
+
+.dal-izq {
+    left: 14px;
+    animation-delay: 0s;
+}
+
+.dal-der {
+    right: 14px;
+    text-orientation: mixed;
+    transform: translateY(-50%) rotate(180deg);
+    animation-delay: 1.5s;
+}
+
+@keyframes flotar {
+    0%   { opacity: 0.5; text-shadow: 0 0 8px #ff7eb6, 0 0 18px #ff7eb6; margin-top: 0px; }
+    50%  { opacity: 1;   text-shadow: 0 0 14px #ff7eb6, 0 0 35px #ffb3d9, 0 0 55px #ffd6ec; margin-top: -12px; }
+    100% { opacity: 0.5; text-shadow: 0 0 8px #ff7eb6, 0 0 18px #ff7eb6; margin-top: 0px; }
+}
+
+/* ── TOP BAR ── */
+.top-bar {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 25px 40px;
+    padding: 18px 40px;
     box-sizing: border-box;
 }
 
-.header h1 {
-    color: #c79b00;
-    margin: 0;
-    font-size: 34px;
-    text-shadow: 0 0 10px gold;
-}
-
-.fecha {
-    color: #555;
-    margin-top: 5px;
-    font-size: 14px;
-}
-
-.usuario-box {
-    background: white;
-    padding: 12px 20px;
-    border-radius: 15px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.1);
-}
-
-.frase-box {
-    width: 500px;
-    margin-bottom: 20px;
-    background: white;
-    padding: 15px;
-    border-radius: 15px;
-    text-align: center;
-    color: #444;
+.btn-salir {
+    background: linear-gradient(90deg, #ff7eb6, #c79b00);
+    color: white;
     font-weight: bold;
-    box-shadow: 0 0 15px rgba(0,0,0,0.08);
+    font-size: 13px;
+    padding: 8px 18px;
+    border-radius: 20px;
+    text-decoration: none;
+    box-shadow: 0 0 12px rgba(255,105,180,0.3);
+    transition: 0.3s;
 }
 
+.btn-salir:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255,105,180,0.5);
+}
+
+.fecha-top {
+    color: #888;
+    font-size: 13px;
+}
+
+/* ── CONTENEDOR ── */
 .contenedor {
     width: 500px;
     padding: 40px;
@@ -68,6 +95,15 @@ body {
     box-shadow: 0 0 25px rgba(0,0,0,0.08);
     margin-bottom: 50px;
     box-sizing: border-box;
+    z-index: 1;
+}
+
+h1 {
+    color: #c79b00;
+    margin: 0 0 5px 0;
+    font-size: 30px;
+    text-shadow: 0 0 10px gold;
+    text-align: center;
 }
 
 h2 {
@@ -75,8 +111,28 @@ h2 {
     text-align: center;
 }
 
+.fecha {
+    color: #555;
+    margin-top: 5px;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* ── LABEL FECHA ── */
+.label-fecha {
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    color: #c79b00;
+    margin-bottom: 4px;
+    margin-top: 4px;
+    padding-left: 4px;
+}
+
+/* ── INPUTS ── */
 input,
-textarea {
+textarea,
+select {
     width: 100%;
     padding: 14px;
     margin-bottom: 15px;
@@ -85,22 +141,56 @@ textarea {
     background: #fafafa;
     font-size: 15px;
     box-sizing: border-box;
+    font-family: Arial;
 }
 
 textarea {
     resize: none;
 }
 
+select {
+    cursor: pointer;
+    color: #444;
+}
+
+/* ── FILA DE PRODUCTO ── */
+.fila {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.fila input {
+    margin-bottom: 0;
+}
+
+.fila input:first-child {
+    flex: 2;
+}
+
+.fila input:nth-child(2) {
+    flex: 1;
+}
+
+/* ── BOTÓN BORRAR FILA ── */
+.btn-borrar {
+    width: auto !important;
+    padding: 10px 14px !important;
+    border-radius: 50% !important;
+    background: linear-gradient(135deg, #ff7eb6, #ff4d4d) !important;
+    font-size: 14px !important;
+    margin-top: 0 !important;
+    flex-shrink: 0;
+}
+
+/* ── BOTONES GENERALES ── */
 button {
     width: 100%;
     padding: 15px;
     border: none;
     border-radius: 15px;
-    background: linear-gradient(
-        90deg,
-        #ff7eb6,
-        #c79b00
-    );
+    background: linear-gradient(90deg, #ff7eb6, #c79b00);
     color: white;
     font-size: 16px;
     font-weight: bold;
@@ -112,4 +202,16 @@ button {
 button:hover {
     transform: scale(1.02);
     box-shadow: 0 0 20px rgba(255,105,180,0.4);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 540px) {
+    .contenedor {
+        width: 95%;
+        padding: 24px 16px;
+    }
+    .dal-izq, .dal-der {
+        font-size: 10px;
+        letter-spacing: 4px;
+    }
 }
