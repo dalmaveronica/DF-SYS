@@ -9,29 +9,38 @@
 
 <body class="fondo">
 
+    <!-- DAL FRANCO flotando a los costados -->
+    <div class="dal-izq">DAL FRANCO</div>
+    <div class="dal-der">DAL FRANCO</div>
+
+    <!-- Barra superior -->
     <div class="top-bar">
-        <div class="top-vacio"></div>
-        <div class="frase-superior">
-            ✨ {{ frase }}
-        </div>
-        <div class="logout">
-            <a href="/logout">Salir</a>
-        </div>
+        <a href="/logout" class="btn-salir">✖️ Salir</a>
+        <div class="fecha-top">{{ fecha }}</div>
     </div>
 
     <div class="contenedor">
 
         <h1>DF SYSTEM ✨</h1>
 
-        <p class="fecha">{{ fecha }}</p>
-
         <form action="/generar" method="POST">
 
             <input type="text" name="cliente" placeholder="Cliente" required>
-            <input type="text" name="razon" placeholder="Razón Social / RFC (Opcional)">
+            <input type="text" name="razon" placeholder="Razón Social (Opcional)">
             <input type="text" name="zona" placeholder="Zona">
-            <textarea name="nota" placeholder="Nota adicional..." rows="4"></textarea>
-            <input type="date" name="fecha_entrega">
+
+            <!-- Selector de vendedor -->
+            <select name="vendedor" required>
+                <option value="" disabled selected>👤 Seleccioná el vendedor</option>
+                <option value="Walter">Walter</option>
+                <option value="Nacho">Nacho</option>
+            </select>
+
+            <!-- Fecha de entrega visible y clara -->
+            <label class="label-fecha">📅 Fecha de Entrega</label>
+            <input type="date" name="fecha_entrega" required>
+
+            <textarea name="nota" placeholder="Nota adicional..." rows="3"></textarea>
 
             <h2>Productos</h2>
 
@@ -39,6 +48,7 @@
                 <div class="fila">
                     <input list="listaProductos" name="producto[]" placeholder="Buscar producto" required>
                     <input type="text" name="cantidad[]" placeholder="Cantidad" required>
+                    <button type="button" class="btn-borrar" onclick="borrarFila(this)">✖️</button>
                 </div>
             </div>
 
@@ -49,7 +59,7 @@
             </datalist>
 
             <button type="button" onclick="agregarProducto()">+ Agregar Producto</button>
-            <button type="submit">Generar Pedido</button>
+            <button type="submit">📄 Generar Pedido</button>
 
         </form>
 
@@ -63,8 +73,17 @@
             fila.innerHTML = `
                 <input list="listaProductos" name="producto[]" placeholder="Buscar producto" required>
                 <input type="text" name="cantidad[]" placeholder="Cantidad" required>
+                <button type="button" class="btn-borrar" onclick="borrarFila(this)">✖️</button>
             `;
             contenedor.appendChild(fila);
+        }
+
+        function borrarFila(btn) {
+            let contenedor = document.getElementById("productos");
+            // No borrar si es la única fila
+            if (contenedor.children.length > 1) {
+                btn.parentElement.remove();
+            }
         }
     </script>
 
