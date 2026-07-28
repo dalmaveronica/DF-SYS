@@ -14,7 +14,7 @@ import json
 import os
 
 app = Flask(__name__)
-app.secret_key = "DFsystem"
+app.secret_key = "DALMA FRANCO"
 
 # --------------------------------
 # CREAR ARCHIVOS SI NO EXISTEN
@@ -30,7 +30,7 @@ if not os.path.exists("productos.json"):
         json.dump(productos_iniciales, archivo)
 
 if not os.path.exists("usuarios.json"):
-    usuarios = {"walter": "1234", "nacho": "1234"}
+    usuarios = {"walter": "123", "ENZO" : "321"}
     with open("usuarios.json", "w") as archivo:
         json.dump(usuarios, archivo)
 
@@ -110,7 +110,7 @@ def generar():
     nombre_pdf = f"Pedido_{datetime.now().strftime('%d-%m-%Y_%H-%M')}.pdf"
     ruta       = os.path.join("pedidos", nombre_pdf)
 
-    # ── TAMAÑO A4 ──
+     # ── TAMAÑO A4 ──
     ancho, alto = A4   # 595 x 842 puntos
 
     pdf = canvas.Canvas(ruta, pagesize=A4)
@@ -123,7 +123,7 @@ def generar():
         # Encabezado
         pdf.setFont("Helvetica", 9)
         pdf.setFillColorRGB(0, 0, 0)
-        pdf.drawString(35, alto - 30, "★ DF SYSTEM")
+        pdf.drawString(35, alto - 30, "★ DALMA FRANCO ★ ")
 
         pdf.setFont("Helvetica-Bold", 18)
         pdf.setFillColorRGB(0, 0, 0)
