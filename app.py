@@ -17,6 +17,38 @@ app = Flask(__name__)
 app.secret_key = "DALMA FRANCO"
 
 # --------------------------------
+# NOTAS DEL DÍA (se imprimen en el PDF, una vez por pedido)
+# --------------------------------
+
+notas_dia = {
+    "LUNES": "Hoy toca: Lunes - Airbag\n\nMientras más me apuren...\nmás me voy a tardar. 😂",
+
+    "MARTES": "Sabemos que cada pedido refleja el esfuerzo de todo el equipo.\n"
+              "¡Gracias por dar lo mejor de ustedes!\n"
+              "¡Buena jornada!",
+
+    "MIÉRCOLES": "\"Despacio, que estoy apurada.\"\n"
+                 "¡Ya estamos en mitad de semana!",
+
+    "JUEVES": "Nunca es tarde para aprender algo nuevo.\n\n"
+              "Vocabulario:\n"
+              "• Envasado → con V\n"
+              "PARA TENER EN CUENTA!!!!:\n"
+              "Revisar 25 veces las bandejas, mirarme fijo o respirar al lado mío\n"
+              "no acelera la preparación de los pedidos.\n\n"
+              "PD:¡Que nunca falten los mates!",
+
+    "VIERNES": "Después de toda una semana de trabajo...\n"
+               "por fin llegamos a juntar para el asado.\n\n"
+               "¡QUE TENGAN UN BENDECIDO DIA!",
+
+"SÁBADO": "¡Sábado 1 de Agosto!\n\n"
+              "Dia del TÉ de ruda para arrancar el mes con salud,suerte y buenas energias.\n\n"
+              "Que no falten las facturitas.\n\n"
+              "Buen fin de semana ♡"
+}
+
+# --------------------------------
 # CREAR ARCHIVOS SI NO EXISTEN
 # --------------------------------
 
@@ -115,6 +147,26 @@ def generar():
 
     pdf = canvas.Canvas(ruta, pagesize=A4)
 
+    def dibujar_nota_dia(pdf, y_inicio):
+        """Dibuja la nota del día, centrada, debajo del título. Devuelve el nuevo y."""
+        texto = notas_dia.get(dia_semana, "")
+        if not texto:
+            return y_inicio
+
+        pdf.setFont("Helvetica-BoldOblique", 8)
+        pdf.setFillColorRGB(0.35, 0.35, 0.35)
+
+        y = y_inicio
+        for linea in texto.split("\n"):
+            if linea.strip() == "":
+                y -= 6
+                continue
+            pdf.drawCentredString(ancho / 2, y, linea)
+            y -= 10
+
+        pdf.setFillColorRGB(0, 0, 0)
+        return y - 4
+
     def nueva_pagina(pdf, primera=False):
         """Dibuja el marco y encabezado en cada página."""
         pdf.setLineWidth(1)
@@ -140,8 +192,11 @@ def generar():
         pdf.line(20, alto - 45, ancho - 20, alto - 45)
 
         if primera:
+            # Nota del día (una sola vez, debajo del encabezado)
+            y_nota = dibujar_nota_dia(pdf, alto - 55)
+
             # ── CAMPOS INFO ── bien espaciados
-            y0 = alto - 58
+            y0 = y_nota - 8
 
             # RAZÓN SOCIAL
             pdf.setFont("Helvetica", 8)
