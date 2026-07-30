@@ -35,7 +35,7 @@ notas_dia = {
               "• Envasado → con V\n"
               "PARA TENER EN CUENTA!!!!:\n"
               "Revisar 25 veces las bandejas, mirarme fijo o respirar al lado mío\n"
-              "no acelera la preparación de los pedidos.\n\n"
+              "no acelera la FACTURACIÓN.\n\n"
               "PD:¡Que nunca falten los mates!",
 
     "VIERNES": "Después de toda una semana de trabajo...\n"
