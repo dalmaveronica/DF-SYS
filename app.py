@@ -23,16 +23,16 @@ app.secret_key = "DALMA FRANCO"
 notas_dia = {
     "LUNES": "BUEN INICIO DE SEMANA, QUE CADA DÍA SEA MEJOR QUE EL ANTERIOR",
 
-    "MARTES": "Sabemos que cada pedido refleja el esfuerzo de todo el equipo.\n"
-              "¡Gracias por dar lo mejor de ustedes!\n"
+    "MARTES": "Sabemos que cada pedido refleja el esfuerzo de todo el equipo.\n",
+              "¡Gracias por dar lo mejor de ustedes!\n",
               "¡Buena jornada!",
 
-    "MIÉRCOLES": "NO ES LA MITAD QUE FALTA,ES LA MITAD QUE LOGRASTE\n"
+    "MIÉRCOLES": "NO ES LA MITAD QUE FALTA,ES LA MITAD QUE LOGRASTE\n",
                  "¡EXCELENTE JORNADA!",
 
     "JUEVES": "LAS COSAS BUENAS LLEVAN TIEMPO,PERO LLEGAN!",
 
-    "VIERNES": "LOS LIMITES QUE MÁS CUESTA ROMPER SON LOS QUE UNO MISMO SE PONE\n\n",
+    "VIERNES": "LOS LIMITES QUE MÁS CUESTA ROMPER SON LOS QUE UNO MISMO SE PONE\n",
                "¡QUE TENGAN UN BENDECIDO DIA!",
 
     "SÁBADO": "A VECES AVANZAR ES SIMPLEMENTE NO PARAR\n",
