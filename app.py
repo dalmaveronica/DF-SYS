@@ -21,30 +21,21 @@ app.secret_key = "DALMA FRANCO"
 # --------------------------------
 
 notas_dia = {
-    "LUNES": "Hoy toca: Lunes - Airbag\n\nMientras más me apuren...\nmás me voy a tardar. 😂",
+    "LUNES": "BUEN INICIO DE SEMANA, QUE CADA DÍA SEA MEJOR QUE EL ANTERIOR",
 
     "MARTES": "Sabemos que cada pedido refleja el esfuerzo de todo el equipo.\n"
               "¡Gracias por dar lo mejor de ustedes!\n"
               "¡Buena jornada!",
 
-    "MIÉRCOLES": "\"Despacio, que estoy apurada.\"\n"
-                 "¡Ya estamos en mitad de semana!",
+    "MIÉRCOLES": "\"NO ES LA MITAD QUE FALTA,ES LA MITAD QUE LOGRASTE\n"\n"
+                 "¡EXCELENTE JORNADA!",
 
-    "JUEVES": "Nunca es tarde para aprender algo nuevo.\n\n"
-              "Vocabulario:\n"
-              "• Envasado → con V\n"
-              "PARA TENER EN CUENTA!!!!:\n"
-              "Revisar 25 veces las bandejas, mirarme fijo o respirar al lado mío\n"
-              "no acelera la FACTURACIÓN.\n\n"
-              "PD:¡Que nunca falten los mates!",
+    "JUEVES": "LAS COSAS BUENAS LLEVAN TIEMPO,PERO LLEGAN!",
 
-    "VIERNES": "Después de toda una semana de trabajo...\n"
-               "por fin llegamos a juntar para el asado.\n\n"
+    "VIERNES": "LOS LIMITES QUE MÁS CUESTA ROMPER SON LOS QUE UNO MISMO SE PONE\n\n",
                "¡QUE TENGAN UN BENDECIDO DIA!",
 
-"SÁBADO": "¡Sábado 1 de Agosto!\n\n"
-              "Dia del TÉ de ruda para arrancar el mes con salud,suerte y buenas energias.\n\n"
-              "Que no falten las facturitas.\n\n"
+"SÁBADO":  "A VECES AVANZAR ES SIMPLEMENTE NO PARAR\n\n"
               "Buen fin de semana ♡"
 }
 
