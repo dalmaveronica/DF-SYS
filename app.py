@@ -27,7 +27,7 @@ notas_dia = {
               "¡Gracias por dar lo mejor de ustedes!\n"
               "¡Buena jornada!",
 
-    "MIÉRCOLES": "\"NO ES LA MITAD QUE FALTA,ES LA MITAD QUE LOGRASTE\n"\n"
+    "MIÉRCOLES": "NO ES LA MITAD QUE FALTA,ES LA MITAD QUE LOGRASTE\n"
                  "¡EXCELENTE JORNADA!",
 
     "JUEVES": "LAS COSAS BUENAS LLEVAN TIEMPO,PERO LLEGAN!",
@@ -35,8 +35,8 @@ notas_dia = {
     "VIERNES": "LOS LIMITES QUE MÁS CUESTA ROMPER SON LOS QUE UNO MISMO SE PONE\n\n",
                "¡QUE TENGAN UN BENDECIDO DIA!",
 
-"SÁBADO":  "A VECES AVANZAR ES SIMPLEMENTE NO PARAR\n\n"
-              "Buen fin de semana ♡"
+    "SÁBADO": "A VECES AVANZAR ES SIMPLEMENTE NO PARAR\n",
+              "Buen fin de semana ♡",
 }
 
 # --------------------------------
