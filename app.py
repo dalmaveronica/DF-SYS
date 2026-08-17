@@ -24,23 +24,35 @@ notas_dia = {
     "LUNES": "BUEN INICIO DE SEMANA, QUE CADA DÍA SEA MEJOR QUE EL ANTERIOR",
 
     "MARTES": "PISCIS!! EL INTUITIVO DEL ZODIACO.\n"
-              "¡LO BUENO: Piscis suele captar lo que otros no dicen\n"
+              "¡LO BUENO: Suele captar lo que otros no dicen\n"
               "¡Tiene una intuición muy fuerte y una sensibilidad especial\n"
               "SU SUPERPODER: Puede transformar algo simple en algo especial\n"
               "gracias a su imaginación\n"
               "CURIOSIDAD: Es el último signo del zodiaco y según la astrología, por eso\n"
               "se dice que reune un poquito de la esencia de todos los demás sigos",
     
-    "MIÉRCOLES": "NO ES LA MITAD QUE FALTA,ES LA MITAD QUE LOGRASTE\n"
-                 "¡EXCELENTE JORNADA!",
+    "MIÉRCOLES": "FELIZ CUMPLEAÑOS FACU!!!!\n"
+                 "¡Te deseamos lo mejor hoy y siempre! que dsfrutes mucho tu día!\n"
+                 "LEO!! EL BRILLANTE DEL ZODIACO!!\n"
+                 "LO BUENO: Tiene una mente rápida,mucha seguridad y una capacidad natural para destacar\n"
+                 "SU SUPERPODER: Confianza natural , regido por el sol, brilla sin esfuerzo\n"
+                 "DATO CURIOSO: Leo es un signo fijo,por eso suele ser más constante y decidido de lo que aparenta",
 
-    "JUEVES": "LAS COSAS BUENAS LLEVAN TIEMPO,PERO LLEGAN!",
+    "JUEVES": "ACUARIO: EL VISIONARIO DEL ZODIACO!"\n"
+              "LO BUENO: su autencidad , su mente abierta y la capacidad de aceptar a los demas como son\n"
+              "SU SUPERPODER: Pensar diferente, encontrar soluciones inesperadas y ver posobilidades que otros no imaginan\n"
+              "DATO CUIOSO: Aunque puede parecer distante, suele tener un mundo interior lleno de ideas y pensamientos\n"
+              "que no siempre comparte",
 
-    "VIERNES": "LOS LIMITES QUE MÁS CUESTA ROMPER SON LOS QUE UNO MISMO SE PONE\n\n"
-               "¡QUE TENGAN UN BENDECIDO DIA!",
+    "VIERNES": "VIRGO! EL PERFECCIONISTA DEL ZODIACO\n\n"
+               "¡LO BUENO: Observador, responsable y detallista,siempre busca hacer las cosas de la mejor manera!"\n"
+               "SU SUPERPODER: Convertir caos en orden y encontrar el detalle que a todos se les escapó\n"
+               "DATO CURIOSO: Suele tener una mente muy analítica,puede verse tranquilo mientras que su mente piensa mil cosas"
 
-    "SÁBADO": "A VECES AVANZAR ES SIMPLEMENTE NO PARAR\n\n"
-              "Buen fin de semana ♡",
+    "SÁBADO": "SAGITARIO: EL AVENTURERO DEL ZODIACO \n\n"
+              "LO BUENO: Su alegria contagiosa, su sineridad y esa capacidad de hacer sentir que siempre hay algo bueno por venir♡\n"
+              "SU SUPERPODER:Convertir cualquier experiencia en aventura y encontrar en cada camino una oportunidad para crecer\n"
+              "DATO CURIOSO: Único signo representado por el centauro arquero,simboliza el deceo de explorar,aprender y nuevos horizontes",
 }
 
 # --------------------------------
