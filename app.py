@@ -23,10 +23,14 @@ app.secret_key = "DALMA FRANCO"
 notas_dia = {
     "LUNES": "BUEN INICIO DE SEMANA, QUE CADA DÍA SEA MEJOR QUE EL ANTERIOR",
 
-    "MARTES": "Sabemos que cada pedido refleja el esfuerzo de todo el equipo.\n"
-              "¡Gracias por dar lo mejor de ustedes!\n"
-              "¡Buena jornada!",
-
+    "MARTES": "PISCIS!! EL INTUITIVO DEL ZODIACO.\n"
+              "¡LO BUENO: Piscis suele captar lo que otros no dicen\n"
+              "¡Tiene una intuición muy fuerte y una sensibilidad especial\n"
+              "SU SUPERPODER: Puede transformar algo simple en algo especial\n"
+              "gracias a su imaginación\n"
+              "CURIOSIDAD: Es el último signo del zodiaco y según la astrología, por eso\n"
+              "se dice que reune un poquito de la esencia de todos los demás sigos",
+    
     "MIÉRCOLES": "NO ES LA MITAD QUE FALTA,ES LA MITAD QUE LOGRASTE\n"
                  "¡EXCELENTE JORNADA!",
 
