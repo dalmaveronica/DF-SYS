@@ -28,7 +28,7 @@ notas_dia = {
               "¡Tiene una intuición muy fuerte y una sensibilidad especial\n"
               "SU SUPERPODER: Puede transformar algo simple en algo especial\n"
               "gracias a su imaginación\n"
-              "CURIOSIDAD: Es el último signo del zodiaco y según la astrología, por eso\n"
+              "CURIOSIDAD: Es el último signo del zodiaco y según la astrología\n"
               "se dice que reune un poquito de la esencia de todos los demás sigos",
     
     "MIÉRCOLES": "FELIZ CUMPLEAÑOS FACU!!!!\n"
