@@ -38,21 +38,21 @@ notas_dia = {
                  "SU SUPERPODER: Confianza natural , regido por el sol, brilla sin esfuerzo\n"
                  "DATO CURIOSO: Leo es un signo fijo,por eso suele ser más constante y decidido de lo que aparenta",
 
-    "JUEVES": "ACUARIO: EL VISIONARIO DEL ZODIACO!"\n"
-              "LO BUENO: su autencidad , su mente abierta y la capacidad de aceptar a los demas como son\n"
-              "SU SUPERPODER: Pensar diferente, encontrar soluciones inesperadas y ver posobilidades que otros no imaginan\n"
-              "DATO CUIOSO: Aunque puede parecer distante, suele tener un mundo interior lleno de ideas y pensamientos\n"
+    "JUEVES": "ACUARIO: EL VISIONARIO DEL ZODIACO!\n"
+              "LO BUENO: su autenticidad , su mente abierta y la capacidad de aceptar a los demas como son\n"
+              "SU SUPERPODER: Pensar diferente, encontrar soluciones inesperadas y ver posibilidades que otros no imaginan\n"
+              "DATO CURIOSO: Aunque puede parecer distante, suele tener un mundo interior lleno de ideas y pensamientos\n"
               "que no siempre comparte",
 
     "VIERNES": "VIRGO! EL PERFECCIONISTA DEL ZODIACO\n\n"
-               "¡LO BUENO: Observador, responsable y detallista,siempre busca hacer las cosas de la mejor manera!"\n"
+               "¡LO BUENO: Observador, responsable y detallista,siempre busca hacer las cosas de la mejor manera!\n"
                "SU SUPERPODER: Convertir caos en orden y encontrar el detalle que a todos se les escapó\n"
                "DATO CURIOSO: Suele tener una mente muy analítica,puede verse tranquilo mientras que su mente piensa mil cosas"
 
     "SÁBADO": "SAGITARIO: EL AVENTURERO DEL ZODIACO \n\n"
-              "LO BUENO: Su alegria contagiosa, su sineridad y esa capacidad de hacer sentir que siempre hay algo bueno por venir♡\n"
+              "LO BUENO: Su alegria contagiosa, su sinceridad y esa capacidad de hacer sentir que siempre hay algo bueno por venir♡\n"
               "SU SUPERPODER:Convertir cualquier experiencia en aventura y encontrar en cada camino una oportunidad para crecer\n"
-              "DATO CURIOSO: Único signo representado por el centauro arquero,simboliza el deceo de explorar,aprender y nuevos horizontes",
+              "DATO CURIOSO: Único signo representado por el centauro arquero,simboliza el deseo de explorar,aprender y nuevos horizontes",
 }
 
 # --------------------------------
