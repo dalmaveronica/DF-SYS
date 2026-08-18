@@ -47,7 +47,7 @@ notas_dia = {
     "VIERNES": "VIRGO! EL PERFECCIONISTA DEL ZODIACO\n\n"
                "¡LO BUENO: Observador, responsable y detallista,siempre busca hacer las cosas de la mejor manera!\n"
                "SU SUPERPODER: Convertir caos en orden y encontrar el detalle que a todos se les escapó\n"
-               "DATO CURIOSO: Suele tener una mente muy analítica,puede verse tranquilo mientras que su mente piensa mil cosas"
+               "DATO CURIOSO: Suele tener una mente muy analítica,puede verse tranquilo mientras que su mente piensa mil cosas",
 
     "SÁBADO": "SAGITARIO: EL AVENTURERO DEL ZODIACO \n\n"
               "LO BUENO: Su alegria contagiosa, su sinceridad y esa capacidad de hacer sentir que siempre hay algo bueno por venir♡\n"
