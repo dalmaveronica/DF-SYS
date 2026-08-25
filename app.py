@@ -24,35 +24,31 @@ notas_dia = {
     "LUNES": "BUEN INICIO DE SEMANA, QUE CADA DÍA SEA MEJOR QUE EL ANTERIOR",
 
     "MARTES": "PISCIS!! EL INTUITIVO DEL ZODIACO.\n"
-              "¡LO BUENO: Suele captar lo que otros no dicen\n"
-              "¡Tiene una intuición muy fuerte y una sensibilidad especial\n"
-              "SU SUPERPODER: Puede transformar algo simple en algo especial\n"
-              "gracias a su imaginación\n"
-              "CURIOSIDAD: Es el último signo del zodiaco y según la astrología\n"
-              "se dice que reune un poquito de la esencia de todos los demás sigos",
+              "¡LO Malo: Sensible,intenso y muy emocional\n"
+              "Puede ser cambiante y rencoroso cuando algo le molesta\n"
+              "Idealiza demasiado a las personas, se decepciona facil\n"
+              "Cuando se cansa, puede desaparecer o volverse frio de golpe\n"
+              "CURIOSIDAD: Parecen distraidos, pero se acuerdan de detalles que vos ni sabias que habian notado",
     
-    "MIÉRCOLES": "FELIZ CUMPLEAÑOS FACU!!!!\n"
-                 "¡Te deseamos lo mejor hoy y siempre! que dsfrutes mucho tu día!\n"
-                 "LEO!! EL BRILLANTE DEL ZODIACO!!\n"
-                 "LO BUENO: Tiene una mente rápida,mucha seguridad y una capacidad natural para destacar\n"
-                 "SU SUPERPODER: Confianza natural , regido por el sol, brilla sin esfuerzo\n"
-                 "DATO CURIOSO: Leo es un signo fijo,por eso suele ser más constante y decidido de lo que aparenta",
+    "MIÉRCOLES": "LEO!! EL BRILLANTE DEL ZODIACO!!\n"
+                 "LO MALO: Puede ser orgulloso, egocéntrico y bastante dramático\n"
+                 "Le cuesta aceptar críticas, quiere tener la razon\n"
+                 "DATO CURIOSO: Leo puede ser mucho más sensible de lo que demuestra ",
 
     "JUEVES": "ACUARIO: EL VISIONARIO DEL ZODIACO!\n"
-              "LO BUENO: su autenticidad , su mente abierta y la capacidad de aceptar a los demas como son\n"
-              "SU SUPERPODER: Pensar diferente, encontrar soluciones inesperadas y ver posibilidades que otros no imaginan\n"
-              "DATO CURIOSO: Aunque puede parecer distante, suele tener un mundo interior lleno de ideas y pensamientos\n"
-              "que no siempre comparte",
-
+              "LO MALO: Puede ser frío, distante, terco y muy impredecible.\n"
+              "Sobrepiensa demasiado,le cuesta pedir perdón y aceptar que se equivocó\n"
+              "DATO CURIOSO:Cuando se siente presionado, puede volverse muy cortante y poner distancia",
+              
     "VIERNES": "VIRGO! EL PERFECCIONISTA DEL ZODIACO\n\n"
-               "¡LO BUENO: Observador, responsable y detallista,siempre busca hacer las cosas de la mejor manera!\n"
-               "SU SUPERPODER: Convertir caos en orden y encontrar el detalle que a todos se les escapó\n"
-               "DATO CURIOSO: Suele tener una mente muy analítica,puede verse tranquilo mientras que su mente piensa mil cosas",
+               "¡LO MALO: Crítico,perfeccionista,controlado y sobrepensador!\n"
+               "A veces guarda lo que siente, se distancia y después te pasa factura por cosas que ni sabias que le molestaban\n"
+               "DATO CURIOSO:Obsesivo con el control,sobreanalizar a las personas y espectativas demasiado altas",
 
     "SÁBADO": "SAGITARIO: EL AVENTURERO DEL ZODIACO \n\n"
-              "LO BUENO: Su alegria contagiosa, su sinceridad y esa capacidad de hacer sentir que siempre hay algo bueno por venir♡\n"
-              "SU SUPERPODER:Convertir cualquier experiencia en aventura y encontrar en cada camino una oportunidad para crecer\n"
-              "DATO CURIOSO: Único signo representado por el centauro arquero,simboliza el deseo de explorar,aprender y nuevos horizontes",
+              "LO MALO: Impulsivo, brutalmente sincero, inquieto♡\n"
+              "Se aburre rápido,odia sentirse controlado, se distancia o sale corriendo antes de dar explicaciones\n"
+              "DATO CURIOSO:No hace grandes escenas, simplemente toma distancia y sigue con su vida como si nada",
 }
 
 # --------------------------------
