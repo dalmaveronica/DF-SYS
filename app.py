@@ -41,7 +41,7 @@ notas_dia = {
               "DATO CURIOSO:Cuando se siente presionado, puede volverse muy cortante y poner distancia",
               
     "VIERNES": "VIRGO! EL PERFECCIONISTA DEL ZODIACO\n\n"
-               "¡LO MALO: Crítico,perfeccionista,controlado y sobrepensador!\n"
+               "¡LO MALO: Crítico,perfeccionista,controlador y sobrepensador!\n"
                "A veces guarda lo que siente, se distancia y después te pasa factura por cosas que ni sabias que le molestaban\n"
                "DATO CURIOSO:Obsesivo con el control,sobreanalizar a las personas y espectativas demasiado altas",
 
