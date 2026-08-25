@@ -21,7 +21,7 @@ app.secret_key = "DALMA FRANCO"
 # --------------------------------
 
 notas_dia = {
-    "LUNES": "BUEN INICIO DE SEMANA, QUE CADA DÍA SEA MEJOR QUE EL ANTERIOR",
+    "LUNES": "BUEN INICIO DE SEMANA, QUE LAS GANAS DE TRABAJAR NOS ENCUENTREN!",
 
     "MARTES": "PISCIS!! EL INTUITIVO DEL ZODIACO.\n"
               "¡LO Malo: Sensible,intenso y muy emocional\n"
