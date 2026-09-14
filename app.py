@@ -21,34 +21,21 @@ app.secret_key = "DALMA FRANCO"
 # --------------------------------
 
 notas_dia = {
-    "LUNES": "BUEN INICIO DE SEMANA, QUE LAS GANAS DE TRABAJAR NOS ENCUENTREN!",
+    "LUNES": "BIENVENIDO VÍBORA!!!\n\n",
+             "VOLVIÓ EL VENENO QUE LE FALTABA A LA FÁBRICA",
 
-    "MARTES": "PISCIS!! EL INTUITIVO DEL ZODIACO.\n"
-              "¡LO Malo: Sensible,intenso y muy emocional\n"
-              "Puede ser cambiante y rencoroso cuando algo le molesta\n"
-              "Idealiza demasiado a las personas, se decepciona facil\n"
-              "Cuando se cansa, puede desaparecer o volverse frio de golpe\n"
-              "CURIOSIDAD: Parecen distraidos, pero se acuerdan de detalles que vos ni sabias que habian notado",
+    "MARTES": "QUE LO QUE VENGA ENCUENTRE UNA VERSIÓN DE VOS MÁS FUERTE, MÁS TRANQUIL@ Y MAS FELIZ",
     
-    "MIÉRCOLES": "LEO!! EL BRILLANTE DEL ZODIACO!!\n"
-                 "LO MALO: Puede ser orgulloso, egocéntrico y bastante dramático\n"
-                 "Le cuesta aceptar críticas, quiere tener la razon\n"
-                 "DATO CURIOSO: Leo puede ser mucho más sensible de lo que demuestra ",
+    "MIÉRCOLES": "NO TODO TIENE QUE SALIR PERFECTO PARA QUE LA VIDA SEA HERMOSA",
 
-    "JUEVES": "ACUARIO: EL VISIONARIO DEL ZODIACO!\n"
-              "LO MALO: Puede ser frío, distante, terco y muy impredecible.\n"
-              "Sobrepiensa demasiado,le cuesta pedir perdón y aceptar que se equivocó\n"
-              "DATO CURIOSO:Cuando se siente presionado, puede volverse muy cortante y poner distancia",
+    "JUEVES": "HOY PUEDE SER UN GRAN DÍA,PLANTÉATELO ASÍ",
               
-    "VIERNES": "VIRGO! EL PERFECCIONISTA DEL ZODIACO\n\n"
-               "¡LO MALO: Crítico,perfeccionista,controlador y sobrepensador!\n"
-               "A veces guarda lo que siente, se distancia y después te pasa factura por cosas que ni sabias que le molestaban\n"
-               "DATO CURIOSO:Obsesivo con el control,sobreanalizar a las personas y espectativas demasiado altas",
+    "VIERNES": "NO PODEMOS CAMBIAR LO QUE PASÓ,PERO SÍ PODEMOS DECIDIR QUE HACER CON ESO",
 
-    "SÁBADO": "SAGITARIO: EL AVENTURERO DEL ZODIACO \n\n"
-              "LO MALO: Impulsivo, brutalmente sincero, inquieto♡\n"
-              "Se aburre rápido,odia sentirse controlado, se distancia o sale corriendo antes de dar explicaciones\n"
-              "DATO CURIOSO:No hace grandes escenas, simplemente toma distancia y sigue con su vida como si nada",
+    "SÁBADO": "FELIZ CUMPLEAÑOS MATY!!!!\n\n"
+              "QUE LA VIDA TE DEVUELVA EN MOMENTOS LINDOS TODO LO BUENO QUE DAS♡\n"
+              "QUE NUNCA TE FALTEN MOTIVOS PARA SONREÍR Y SUEÑOS POR CUMPLIR\n"
+              "QUE TENGAS UN HERMSO DÍA! TE QUEREMOS!!",
 }
 
 # --------------------------------
