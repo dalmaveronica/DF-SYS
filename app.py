@@ -21,7 +21,7 @@ app.secret_key = "DALMA FRANCO"
 # --------------------------------
 
 notas_dia = {
-    "LUNES": "BIENVENIDO VÍBORA!!!\n\n",
+    "LUNES": "BIENVENIDO VÍBORA!!!\n\n"
              "VOLVIÓ EL VENENO QUE LE FALTABA A LA FÁBRICA",
 
     "MARTES": "QUE LO QUE VENGA ENCUENTRE UNA VERSIÓN DE VOS MÁS FUERTE, MÁS TRANQUIL@ Y MAS FELIZ",
