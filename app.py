@@ -21,21 +21,19 @@ app.secret_key = "DALMA FRANCO"
 # --------------------------------
 
 notas_dia = {
-    "LUNES": "BIENVENIDO VÍBORA!!!\n\n"
-             "VOLVIÓ EL VENENO QUE LE FALTABA A LA FÁBRICA",
+    "LUNES": "FELIZ PRIMAVERA♡ 𖡼.𖤣𖥧𖡼.𖤣𖥧 !!!\n\n"
+             "QUE LLEGUEN DÍAS LLENOS DE PEQUEÑOS MOMENTOS Y RECUERDOS FELICES",
 
-    "MARTES": "QUE LO QUE VENGA ENCUENTRE UNA VERSIÓN DE VOS MÁS FUERTE, MÁS TRANQUIL@ Y MAS FELIZ",
+    "MARTES": "¿Qué cosa es, que a su paso el hierro oxida, el acero se rompe y la carne se pudre?",
     
-    "MIÉRCOLES": "NO TODO TIENE QUE SALIR PERFECTO PARA QUE LA VIDA SEA HERMOSA",
+    "MIÉRCOLES": "Si existe, nadie lo nombra. Si lo nombras, deja de ser. No se ve ni se toca, pero todos lo entienden. ¿Qué es?",
 
-    "JUEVES": "HOY PUEDE SER UN GRAN DÍA,PLANTÉATELO ASÍ",
+    "JUEVES": "Que las buenas vibras te acompañen desde el primer momento",
               
-    "VIERNES": "NO PODEMOS CAMBIAR LO QUE PASÓ,PERO SÍ PODEMOS DECIDIR QUE HACER CON ESO",
+    "VIERNES": "UN DÍA MÁS CERCA DEL SUELDO Y UN DÍA MÁS LEJOS DE LA PACIENCIA",
 
-    "SÁBADO": "FELIZ CUMPLEAÑOS MATY!!!!\n\n"
-              "QUE LA VIDA TE DEVUELVA EN MOMENTOS LINDOS TODO LO BUENO QUE DAS♡\n"
-              "QUE NUNCA TE FALTEN MOTIVOS PARA SONREÍR Y SUEÑOS POR CUMPLIR\n"
-              "QUE TENGAS UN HERMSO DÍA! TE QUEREMOS!!",
+    "SÁBADO": "LLEGO EL SÁBADO !!!!\n\n"
+              "EL CUERPO VINO,PERO EL ALMA QUEDÓ DURMIENDO, BUEN FIN DE SEMANA!!",
 }
 
 # --------------------------------
