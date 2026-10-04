@@ -21,19 +21,43 @@ app.secret_key = "DALMA FRANCO"
 # --------------------------------
 
 notas_dia = {
-    "LUNES": "FELIZ PRIMAVERA♡ 𖡼.𖤣𖥧𖡼.𖤣𖥧 !!!\n\n"
-             "QUE LLEGUEN DÍAS LLENOS DE PEQUEÑOS MOMENTOS Y RECUERDOS FELICES",
+    "LUNES": "Biemvenido OCTOBRE♡ 𖡼.𖤣𖥧𖡼.𖤣𖥧 !!!\n\n"
+             "No pude darles la bienvenida a tiempo, pero nunca es tarde para desearles un hermoso mes!!",
+             "Que octubre nos encuentre con mucha paz,salud,buenos momentos y esas pequeñas cosas que hacen que un dia cualquiera se vuelva especial",
+             "FRASE DEL DÍA",
+             "NUNCA ES TARDE PARA VOLVER A SENTIRSE JOVEN,PARA EMPEZAR DE NUEVO,PARA SONREÍR SIN MOTIVO Y DISFRUTAR DE LA VIDA COMO SI FUERA LA PRIMERA VEZ",
+             "QUE TENGAMOS UN HERMOSO MES!!!",
 
-    "MARTES": "¿Qué cosa es, que a su paso el hierro oxida, el acero se rompe y la carne se pudre?",
-    
-    "MIÉRCOLES": "Si existe, nadie lo nombra. Si lo nombras, deja de ser. No se ve ni se toca, pero todos lo entienden. ¿Qué es?",
+    "MARTES": "MUY BUENOS DÍAS!!!",
+              "Que sea una jornada tranquila, productiva y llena de motivos para sonrreír",
+              "FRASE DEL DÍA",
+              "CADA DÍA DE LLUVIA TRAE SU ARCOÍRIS.Y MUCHAS VECES, EL CAMINO CORRECTO NO ES EL MÁS FÁCIL, PERO SÍ EL QUE NOS LLEVA HACIA DONDE REALMENTE QUEREMOS ESTAR",
 
-    "JUEVES": "Que las buenas vibras te acompañen desde el primer momento",
-              
-    "VIERNES": "UN DÍA MÁS CERCA DEL SUELDO Y UN DÍA MÁS LEJOS DE LA PACIENCIA",
 
-    "SÁBADO": "LLEGO EL SÁBADO !!!!\n\n"
-              "EL CUERPO VINO,PERO EL ALMA QUEDÓ DURMIENDO, BUEN FIN DE SEMANA!!",
+    "MIÉRCOLES": "BUENOS DÍAS EQUIPO DE EXPEDICIÓN!!",
+                 "Les deseo una exelente jornada, llena de buenas energías, paciencia y muchas cosas lindas",
+                 "FRASE DEL DÍA",
+                 "ELIMINA DE TU VIDA TODO AQUELLO QUE TE QUITE LA SONRISA,Y DEJA ESPACIO PARA TODO LO QUE TE HAGA FELIZ!",
+
+    "JUEVES": "BUENOS DÍAS VÍBORA!! BUENOS DÍAS CIN!!!",
+              "Les deceo un hermoso Jueves, de esos cargaditos de trabajo y recordarles que detras de cada jornada están ustedes",
+              "poniendo siempre lo mejor,dando lo mejor de sí y sacando todo adelante",
+              "Queria agradecerles por el compromiso y el esfuerzo de todos los días,incluso en esas jornadas que parecen no terminar nunca!",
+              "FRASE DEL DÍA",
+              "NO IMPORTA COMO TERMINO AYER,SIEMPRE TENÉS LA OPORTUNIDAD DE EMPEZAR DE NUEVO.SI ALGO SALÍO MAL, APRENDÉ;SI FALLASTE, INTENTA OTRA VEZ",
+              "SI TE EQUIVOCASTE, CORREGÍ Y SEGUÍ.NO TE CASTIGUES POR LO QUE YA PASÓ...SIMPLEMETE REINICIATE Y VOLVÉ A EMPEZAR LAS VECES QUE SEAN NECESARIAS",
+  
+    "VIERNES": "BUENOS DIAS EXPEDICIÓN!! LLEGO EL VIERNES!!!!!",
+               "Les deceo un hermoso día y una exelente jornada, rodeados de buena energía  y terminando la semana de la mejor manera!!",
+               "FRASE DEL DÍA",
+               "VIVAN CERCA DE LA BUENA GENTE, DE LAS RISAS QUE SALE DEL ALMA Y DE LAS BUENAS VIBRAS.POR QUE CUANDO COMPARTIMOS MOMENTOS",
+               "CON PERSONAS QUE NOS HACEN BIEN,HASTA LOS DÍAS COMUNES SE VUELVEN ESPECIALES.AHÍ ES DONDE LA VIDA REALMENTE TIENE SENTIDO",
+
+    "SÁBADO": "BUENOS DIAS!!!LLEGO EL SÁBADO Y LLLEGO EL FINDE LARGO !!!!\n\n",
+              "Espero puedan disfrutarlo muchisimo,descansar, comparir con los que quieren y recargar energías!!
+              "FRASE DEL DÍA";
+              "QUIZAS NO TENGA LOS LOGROS MÁS GRANDES,PERO TENEMOS ALGO QUE VALE MUCHÍSIMO MÁS,PODEMOS SENTIRNOS PROFUNDAMENTE ORGULLOSOS",
+              "DE CADA UNO DE NOSOTROS POR HABER SEGUIDO ADELANTE,INCLUSO EN ESOS DÍAS EN LOS QUE NADIE VEÍA TODO LO QUE ESTÁBAMOS CARGANDO",
 }
 
 # --------------------------------
