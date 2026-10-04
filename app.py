@@ -21,42 +21,42 @@ app.secret_key = "DALMA FRANCO"
 # --------------------------------
 
 notas_dia = {
-    "LUNES": "Biemvenido OCTOBRE♡ 𖡼.𖤣𖥧𖡼.𖤣𖥧 !!!\n\n",
-             "No pude darles la bienvenida a tiempo, pero nunca es tarde para desearles un hermoso mes!!",
-             "Que octubre nos encuentre con mucha paz,salud,buenos momentos y esas pequeñas cosas que hacen que un dia cualquiera se vuelva especial",
-             "FRASE DEL DÍA",
-             "NUNCA ES TARDE PARA VOLVER A SENTIRSE JOVEN,PARA EMPEZAR DE NUEVO,PARA SONREÍR SIN MOTIVO Y DISFRUTAR DE LA VIDA COMO SI FUERA LA PRIMERA VEZ",
+    "LUNES": "Biemvenido OCTOBRE♡!!!\n\n",
+             "No pude darles la bienvenida a tiempo, pero nunca es tarde para desearles un hermoso mes!!\n"
+             "Que octubre nos encuentre con mucha paz,salud,buenos momentos y esas pequeñas cosas que hacen que un dia cualquiera se vuelva especial\n"
+             "FRASE DEL DÍA\n"
+             "NUNCA ES TARDE PARA VOLVER A SENTIRSE JOVEN,PARA EMPEZAR DE NUEVO,PARA SONREÍR SIN MOTIVO Y DISFRUTAR DE LA VIDA COMO SI FUERA LA PRIMERA VEZ\n"
              "QUE TENGAMOS UN HERMOSO MES!!!",
 
-    "MARTES": "MUY BUENOS DÍAS!!!",
-              "Que sea una jornada tranquila, productiva y llena de motivos para sonrreír",
-              "FRASE DEL DÍA",
+    "MARTES": "MUY BUENOS DÍAS!!\n"
+              "Que sea una jornada tranquila, productiva y llena de motivos para sonrreír\n"
+              "FRASE DEL DÍA\n"
               "CADA DÍA DE LLUVIA TRAE SU ARCOÍRIS.Y MUCHAS VECES, EL CAMINO CORRECTO NO ES EL MÁS FÁCIL, PERO SÍ EL QUE NOS LLEVA HACIA DONDE REALMENTE QUEREMOS ESTAR",
 
 
-    "MIÉRCOLES": "BUENOS DÍAS EQUIPO DE EXPEDICIÓN!!",
-                 "Les deseo una exelente jornada, llena de buenas energías, paciencia y muchas cosas lindas",
-                 "FRASE DEL DÍA",
-                 "ELIMINA DE TU VIDA TODO AQUELLO QUE TE QUITE LA SONRISA,Y DEJA ESPACIO PARA TODO LO QUE TE HAGA FELIZ!",
+    "MIÉRCOLES": "BUENOS DÍAS EQUIPO DE EXPEDICIÓN!!\n"
+                 "Les deseo una exelente jornada, llena de buenas energías, paciencia y muchas cosas lindas\n"
+                 "FRASE DEL DÍA\n"
+                 "ELIMINA DE TU VIDA TODO AQUELLO QUE TE QUITE LA SONRISA,Y DEJA ESPACIO PARA TODO LO QUE TE HAGA FELIZ!,
 
-    "JUEVES": "BUENOS DÍAS VÍBORA!! BUENOS DÍAS CIN!!!",
-              "Les deceo un hermoso Jueves, de esos cargaditos de trabajo y recordarles que detras de cada jornada están ustedes",
-              "poniendo siempre lo mejor,dando lo mejor de sí y sacando todo adelante",
-              "Queria agradecerles por el compromiso y el esfuerzo de todos los días,incluso en esas jornadas que parecen no terminar nunca!",
-              "FRASE DEL DÍA",
-              "NO IMPORTA COMO TERMINO AYER,SIEMPRE TENÉS LA OPORTUNIDAD DE EMPEZAR DE NUEVO.SI ALGO SALÍO MAL, APRENDÉ;SI FALLASTE, INTENTA OTRA VEZ",
+    "JUEVES": "BUENOS DÍAS VÍBORA!! BUENOS DÍAS CIN!!!\n"
+              "Les deceo un hermoso Jueves, de esos cargaditos de trabajo y recordarles que detras de cada jornada están ustedes\n"
+              "poniendo siempre lo mejor,dando lo mejor de sí y sacando todo adelante\n"
+              "Queria agradecerles por el compromiso y el esfuerzo de todos los días,incluso en esas jornadas que parecen no terminar nunca!\n"
+              "FRASE DEL DÍA\n"
+              "NO IMPORTA COMO TERMINO AYER,SIEMPRE TENÉS LA OPORTUNIDAD DE EMPEZAR DE NUEVO.SI ALGO SALÍO MAL, APRENDÉ;SI FALLASTE, INTENTA OTRA VEZ\n"
               "SI TE EQUIVOCASTE, CORREGÍ Y SEGUÍ.NO TE CASTIGUES POR LO QUE YA PASÓ...SIMPLEMETE REINICIATE Y VOLVÉ A EMPEZAR LAS VECES QUE SEAN NECESARIAS",
   
-    "VIERNES": "BUENOS DIAS EXPEDICIÓN!! LLEGO EL VIERNES!!!!!",
-               "Les deceo un hermoso día y una exelente jornada, rodeados de buena energía  y terminando la semana de la mejor manera!!",
-               "FRASE DEL DÍA",
-               "VIVAN CERCA DE LA BUENA GENTE, DE LAS RISAS QUE SALE DEL ALMA Y DE LAS BUENAS VIBRAS.POR QUE CUANDO COMPARTIMOS MOMENTOS",
+    "VIERNES": "BUENOS DIAS EXPEDICIÓN!! LLEGO EL VIERNES!!!!!\n"
+               "Les deceo un hermoso día y una exelente jornada, rodeados de buena energía  y terminando la semana de la mejor manera!!\n"
+               "FRASE DEL DÍA\n"
+               "VIVAN CERCA DE LA BUENA GENTE, DE LAS RISAS QUE SALE DEL ALMA Y DE LAS BUENAS VIBRAS.POR QUE CUANDO COMPARTIMOS MOMENTOS\n"
                "CON PERSONAS QUE NOS HACEN BIEN,HASTA LOS DÍAS COMUNES SE VUELVEN ESPECIALES.AHÍ ES DONDE LA VIDA REALMENTE TIENE SENTIDO",
 
     "SÁBADO": "BUENOS DIAS!!!LLEGO EL SÁBADO Y LLLEGO EL FINDE LARGO !!!!\n\n",
-              "Espero puedan disfrutarlo muchisimo,descansar, comparir con los que quieren y recargar energías!!
-              "FRASE DEL DÍA",
-              "QUIZAS NO TENGA LOS LOGROS MÁS GRANDES,PERO TENEMOS ALGO QUE VALE MUCHÍSIMO MÁS,PODEMOS SENTIRNOS PROFUNDAMENTE ORGULLOSOS",
+              "Espero puedan disfrutarlo muchisimo,descansar, comparir con los que quieren y recargar energías\n"
+              "FRASE DEL DÍA\n"
+              "QUIZAS NO TENGAMOS LOS LOGROS MÁS GRANDES,PERO TENEMOS ALGO QUE VALE MUCHÍSIMO MÁS,PODEMOS SENTIRNOS PROFUNDAMENTE ORGULLOSOS\n"
               "DE CADA UNO DE NOSOTROS POR HABER SEGUIDO ADELANTE,INCLUSO EN ESOS DÍAS EN LOS QUE NADIE VEÍA TODO LO QUE ESTÁBAMOS CARGANDO",
 }
 
