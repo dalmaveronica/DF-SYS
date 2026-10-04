@@ -21,7 +21,7 @@ app.secret_key = "DALMA FRANCO"
 # --------------------------------
 
 notas_dia = {
-    "LUNES": "Biemvenido OCTOBRE♡ 𖡼.𖤣𖥧𖡼.𖤣𖥧 !!!\n\n"
+    "LUNES": "Biemvenido OCTOBRE♡ 𖡼.𖤣𖥧𖡼.𖤣𖥧 !!!\n\n",
              "No pude darles la bienvenida a tiempo, pero nunca es tarde para desearles un hermoso mes!!",
              "Que octubre nos encuentre con mucha paz,salud,buenos momentos y esas pequeñas cosas que hacen que un dia cualquiera se vuelva especial",
              "FRASE DEL DÍA",
@@ -55,7 +55,7 @@ notas_dia = {
 
     "SÁBADO": "BUENOS DIAS!!!LLEGO EL SÁBADO Y LLLEGO EL FINDE LARGO !!!!\n\n",
               "Espero puedan disfrutarlo muchisimo,descansar, comparir con los que quieren y recargar energías!!
-              "FRASE DEL DÍA";
+              "FRASE DEL DÍA",
               "QUIZAS NO TENGA LOS LOGROS MÁS GRANDES,PERO TENEMOS ALGO QUE VALE MUCHÍSIMO MÁS,PODEMOS SENTIRNOS PROFUNDAMENTE ORGULLOSOS",
               "DE CADA UNO DE NOSOTROS POR HABER SEGUIDO ADELANTE,INCLUSO EN ESOS DÍAS EN LOS QUE NADIE VEÍA TODO LO QUE ESTÁBAMOS CARGANDO",
 }
