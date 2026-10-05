@@ -37,7 +37,7 @@ notas_dia = {
     "MIÉRCOLES": "BUENOS DÍAS EQUIPO DE EXPEDICIÓN!!\n"
                  "Les deseo una exelente jornada, llena de buenas energías, paciencia y muchas cosas lindas\n"
                  "FRASE DEL DÍA\n"
-                 "ELIMINA DE TU VIDA TODO AQUELLO QUE TE QUITE LA SONRISA,Y DEJA ESPACIO PARA TODO LO QUE TE HAGA FELIZ!,
+                 "ELIMINA DE TU VIDA TODO AQUELLO QUE TE QUITE LA SONRISA,Y DEJA ESPACIO PARA TODO LO QUE TE HAGA FELIZ!",
 
     "JUEVES": "BUENOS DÍAS VÍBORA!! BUENOS DÍAS CIN!!!\n"
               "Les deceo un hermoso Jueves, de esos cargaditos de trabajo y recordarles que detras de cada jornada están ustedes\n"
