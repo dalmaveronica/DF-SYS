@@ -25,13 +25,15 @@ notas_dia = {
              "No pude darles la bienvenida a tiempo, pero nunca es tarde para desearles un hermoso mes!!\n"
              "Que octubre nos encuentre con mucha paz,salud,buenos momentos y esas pequeñas cosas que hacen que un dia cualquiera se vuelva especial\n"
              "FRASE DEL DÍA\n"
-             "NUNCA ES TARDE PARA VOLVER A SENTIRSE JOVEN,PARA EMPEZAR DE NUEVO,PARA SONREÍR SIN MOTIVO Y DISFRUTAR DE LA VIDA COMO SI FUERA LA PRIMERA VEZ\n"
+             "NUNCA ES TARDE PARA VOLVER A SENTIRSE JOVEN,PARA EMPEZAR DE NUEVO\n"
+             "PARA SONREÍR SIN MOTIVO Y DISFRUTAR DE LA VIDA COMO SI FUERA LA PRIMERA VEZ\n"
              "QUE TENGAMOS UN HERMOSO MES!!!",
 
     "MARTES": "MUY BUENOS DÍAS!!\n"
               "Que sea una jornada tranquila, productiva y llena de motivos para sonrreír\n"
               "FRASE DEL DÍA\n"
-              "CADA DÍA DE LLUVIA TRAE SU ARCOÍRIS.Y MUCHAS VECES, EL CAMINO CORRECTO NO ES EL MÁS FÁCIL, PERO SÍ EL QUE NOS LLEVA HACIA DONDE REALMENTE QUEREMOS ESTAR",
+              "CADA DÍA DE LLUVIA TRAE SU ARCOÍRIS.Y MUCHAS VECES, EL CAMINO CORRECTO NO ES EL MÁS FÁCIL\n"
+              "PERO SÍ EL QUE NOS LLEVA HACIA DONDE REALMENTE QUEREMOS ESTAR",
 
 
     "MIÉRCOLES": "BUENOS DÍAS EQUIPO DE EXPEDICIÓN!!\n"
@@ -44,8 +46,10 @@ notas_dia = {
               "poniendo siempre lo mejor,dando lo mejor de sí y sacando todo adelante\n"
               "Queria agradecerles por el compromiso y el esfuerzo de todos los días,incluso en esas jornadas que parecen no terminar nunca!\n"
               "FRASE DEL DÍA\n"
-              "NO IMPORTA COMO TERMINO AYER,SIEMPRE TENÉS LA OPORTUNIDAD DE EMPEZAR DE NUEVO.SI ALGO SALÍO MAL, APRENDÉ;SI FALLASTE, INTENTA OTRA VEZ\n"
-              "SI TE EQUIVOCASTE, CORREGÍ Y SEGUÍ.NO TE CASTIGUES POR LO QUE YA PASÓ...SIMPLEMETE REINICIATE Y VOLVÉ A EMPEZAR LAS VECES QUE SEAN NECESARIAS",
+              "NO IMPORTA COMO TERMINO AYER,SIEMPRE TENÉS LA OPORTUNIDAD DE EMPEZAR DE NUEVO.SI ALGO SALÍO MAL, APRENDÉ\n"
+              "SI FALLASTE, INTENTA OTRA VEZ\n"
+              "SI TE EQUIVOCASTE, CORREGÍ Y SEGUÍ.NO TE CASTIGUES POR LO QUE YA PASÓ...SIMPLEMETE REINICIATE Y VOLVÉ A EMPEZAR\n"
+              "LAS VECES QUE SEAN NECESARIAS",
   
     "VIERNES": "BUENOS DIAS EXPEDICIÓN!! LLEGO EL VIERNES!!!!!\n"
                "Les deceo un hermoso día y una exelente jornada, rodeados de buena energía  y terminando la semana de la mejor manera!!\n"
