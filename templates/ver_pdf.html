@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PDF Generado</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
@@ -96,18 +97,18 @@
         <div class="paso"><span>5</span> ¡Envialo! 🚀</div>
     </div>
 
-    <a href="/pedido">
+    <a href="{% if es_admin %}/pedidos{% else %}/pedido{% endif %}">
         <button>VOLVER</button>
     </a>
 
 </div>
 
 <script>
-    var vendedor = "{{ pedido.get('vendedor', '') }}";
-    var cliente  = "{{ pedido.get('cliente', '') }}";
-    var zona     = "{{ pedido.get('zona', '') }}";
-    var fechaEnt = "{{ pedido.get('fecha_entrega', '') }}";
-    var detalle  = "{{ pedido.get('detalle_productos', '') | replace('\n', '\\n') }}";
+    var vendedor = {{ pedido.get('vendedor', '') | tojson }};
+    var cliente  = {{ pedido.get('cliente', '') | tojson }};
+    var zona     = {{ pedido.get('zona', '') | tojson }};
+    var fechaEnt = {{ pedido.get('fecha_entrega', '') | tojson }};
+    var detalle  = {{ pedido.get('detalle_productos', '') | tojson }};
 
     var mensaje =
         "📋 NUEVO PEDIDO - DF SYSTEM\n" +

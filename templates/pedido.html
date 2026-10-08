@@ -3,52 +3,71 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>DALMA FRANCO</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body class="fondo">
 
-    <!-- DAL FRANCO flotando a los costados -->
-    <div class="dal-izq">DALMA FRANCO</div>
-    <div class="dal-der">DALMA FRANCO</div>
-
-    <!-- Barra superior -->
-    <div class="top-bar">
-        <a href="/logout" class="btn-salir">✖️ Salir</a>
-        <div class="fecha-top">{{ fecha }}</div>
-    </div>
+    {% include "_cabecera.html" %}
 
     <div class="contenedor">
 
-        <h1>DF SYSTEM ✨</h1>
+        <h1>{% if edit %}EDITAR PEDIDO ✏️{% else %}DF SYSTEM ✨{% endif %}</h1>
 
         <form action="/generar" method="POST">
 
-            <input type="text" name="cliente" placeholder="Cliente" required>
-            <input type="text" name="razon" placeholder="Razón Social (Opcional)">
-            <input type="text" name="zona" placeholder="Zona">
-<!-- Selector de vendedor -->
+            {% if edit %}
+            <input type="hidden" name="pedido_id" value="{{ edit.id }}">
+            {% endif %}
+
+            <input type="text" name="cliente" placeholder="Cliente" value="{{ edit.cliente if edit else '' }}" required>
+            <input type="text" name="razon" placeholder="Razón Social (Opcional)" value="{{ edit.razon if edit else '' }}">
+            <input type="text" name="zona" placeholder="Zona" value="{{ edit.zona if edit else '' }}">
+
+            <!-- Vendedor: la administradora elige, el vendedor usa su propio usuario -->
+            {% if es_admin %}
+            {% set lista = vendedores %}
+            {% if edit and edit.vendedor not in lista %}
+                {% set lista = lista + [edit.vendedor] %}
+            {% endif %}
             <select name="vendedor" required>
-                <option value="" disabled selected>👤 Seleccioná el vendedor</option>
-                <option value="Walter">Walter</option>
-                <option value="ENZO">ENZO</option>
+                {% for v in lista %}
+                <option value="{{ v }}"
+                    {% if (edit and edit.vendedor|lower == v|lower) or (not edit and v|lower == usuario|lower) %}selected{% endif %}>
+                    👤 {{ v }}
+                </option>
+                {% endfor %}
             </select>
+            {% else %}
+            <div class="vendedor-fijo">👤 Vendedor: <strong>{{ usuario }}</strong></div>
+            {% endif %}
 
             <!-- Fecha de entrega visible y clara -->
             <label class="label-fecha">📅 Fecha de Entrega</label>
-            <input type="date" name="fecha_entrega" required>
+            <input type="date" name="fecha_entrega" value="{{ edit.fecha_entrega_iso if edit else '' }}" required>
 
-            <textarea name="nota" placeholder="Nota adicional..." rows="3"></textarea>
+            <textarea name="nota" placeholder="Nota adicional..." rows="3">{{ edit.nota if edit else '' }}</textarea>
 
             <h2>Productos</h2>
 
             <div id="productos">
-                <div class="fila">
-                    <input list="listaProductos" name="producto[]" placeholder="Buscar producto" required>
-                    <input type="text" name="cantidad[]" placeholder="Cantidad" required>
-                    <button type="button" class="btn-borrar" onclick="borrarFila(this)">✖️</button>
-                </div>
+                {% if edit and edit['items'] %}
+                    {% for it in edit['items'] %}
+                    <div class="fila">
+                        <input list="listaProductos" name="producto[]" placeholder="Buscar producto" value="{{ it.producto }}" required>
+                        <input type="text" name="cantidad[]" placeholder="Cantidad" value="{{ it.cantidad }}" required>
+                        <button type="button" class="btn-borrar" onclick="borrarFila(this)">✖️</button>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="fila">
+                        <input list="listaProductos" name="producto[]" placeholder="Buscar producto" required>
+                        <input type="text" name="cantidad[]" placeholder="Cantidad" required>
+                        <button type="button" class="btn-borrar" onclick="borrarFila(this)">✖️</button>
+                    </div>
+                {% endif %}
             </div>
 
             <datalist id="listaProductos">
@@ -58,10 +77,15 @@
             </datalist>
 
             <button type="button" onclick="agregarProducto()">+ Agregar Producto</button>
-            <button type="submit">📄 Generar Pedido</button>
+            <button type="submit">{% if edit %}💾 Guardar cambios y regenerar PDF{% else %}📄 Generar Pedido{% endif %}</button>
 
         </form>
 
+    </div>
+
+    <!-- Calendario -->
+    <div class="contenedor">
+        {% include "_calendario.html" %}
     </div>
 
     <script>
@@ -88,4 +112,3 @@
 
 </body>
 </html>
-

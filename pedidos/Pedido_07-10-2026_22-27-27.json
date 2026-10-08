@@ -1,0 +1,20 @@
+{
+  "id": "Pedido_07-10-2026_22-27-27",
+  "vendedor": "DALMA",
+  "creado_por": "DALMA",
+  "cliente": "HRTHRYJUUKIL",
+  "razon": "",
+  "zona": "",
+  "fecha_entrega": "09 / 10 / 2026",
+  "fecha_entrega_iso": "2026-10-09",
+  "nota": "",
+  "items": [
+    {
+      "producto": "VF",
+      "cantidad": "Y"
+    }
+  ],
+  "detalle_productos": "  • VF xY\n",
+  "pdf": "Pedido_07-10-2026_22-27-27.pdf",
+  "fecha_envio": "07/10/2026 22:27"
+}

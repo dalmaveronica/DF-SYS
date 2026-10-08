@@ -62,6 +62,14 @@ body {
     align-items: center;
     padding: 18px 40px;
     box-sizing: border-box;
+    z-index: 2;
+}
+
+.top-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
 }
 
 .btn-salir {
@@ -81,6 +89,23 @@ body {
     box-shadow: 0 0 20px rgba(255,105,180,0.5);
 }
 
+.btn-nav {
+    background: #ffffffcc;
+    color: #a0356f;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 8px 14px;
+    border-radius: 20px;
+    text-decoration: none;
+    border: 1px solid #ffb3d9;
+    transition: 0.3s;
+}
+
+.btn-nav:hover {
+    background: #fff;
+    box-shadow: 0 0 12px rgba(255,105,180,0.3);
+}
+
 .fecha-top {
     color: #888;
     font-size: 13px;
@@ -96,6 +121,11 @@ body {
     margin-bottom: 50px;
     box-sizing: border-box;
     z-index: 1;
+}
+
+.contenedor.ancho {
+    width: 720px;
+    max-width: 95%;
 }
 
 h1 {
@@ -116,6 +146,12 @@ h2 {
     margin-top: 5px;
     font-size: 14px;
     text-align: center;
+}
+
+.vacio {
+    color: #888;
+    text-align: center;
+    font-size: 14px;
 }
 
 /* ── LABEL FECHA ── */
@@ -151,6 +187,17 @@ textarea {
 select {
     cursor: pointer;
     color: #444;
+}
+
+.vendedor-fijo {
+    padding: 14px;
+    margin-bottom: 15px;
+    border: 1px solid #eee;
+    border-radius: 15px;
+    background: #fafafa;
+    color: #444;
+    font-size: 15px;
+    box-sizing: border-box;
 }
 
 /* ── FILA DE PRODUCTO ── */
@@ -204,14 +251,346 @@ button:hover {
     box-shadow: 0 0 20px rgba(255,105,180,0.4);
 }
 
+/* ── BOTONES CHICOS (listas y paneles) ── */
+.btn-mini,
+button.btn-mini {
+    display: inline-block;
+    width: auto;
+    margin: 0;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #ff7eb6, #c79b00);
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.btn-mini.rojo,
+button.btn-mini.rojo {
+    background: linear-gradient(135deg, #ff7eb6, #ff4d4d);
+}
+
+/* ── MENSAJE DE GUARDADO ── */
+.ok {
+    background: #e6f7ea;
+    border: 1px solid #9ad3a7;
+    color: #256029;
+    border-radius: 12px;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 14px;
+    font-size: 14px;
+}
+
+/* ── CARTEL: PASAR CANTIDADES ── */
+.cartel {
+    width: 500px;
+    max-width: 95%;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff3cd;
+    border: 2px solid #e0a800;
+    border-left: 8px solid #d9534f;
+    border-radius: 16px;
+    padding: 14px 18px;
+    margin-bottom: 14px;
+    color: #5a3e00;
+    font-size: 15px;
+    z-index: 2;
+    animation: latido 1.8s ease-in-out infinite;
+}
+
+.cartel-dias {
+    font-size: 13px;
+    color: #a94442;
+    font-weight: bold;
+}
+
+.cartel form {
+    margin: 0;
+}
+
+.cartel button {
+    width: auto;
+    margin: 0;
+    padding: 10px 16px;
+    font-size: 14px;
+    background: linear-gradient(90deg, #28a745, #5cb85c);
+}
+
+@keyframes latido {
+    0%   { box-shadow: 0 0 6px rgba(217,83,79,0.25); }
+    50%  { box-shadow: 0 0 22px rgba(217,83,79,0.6); }
+    100% { box-shadow: 0 0 6px rgba(217,83,79,0.25); }
+}
+
+/* ── CALENDARIO ── */
+.cal-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    color: #444;
+}
+
+.cal-nav a {
+    text-decoration: none;
+    color: #c79b00;
+    font-size: 20px;
+    padding: 4px 12px;
+}
+
+.cal-tabla {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    margin-bottom: 14px;
+}
+
+.cal-tabla th {
+    color: #c79b00;
+    font-size: 13px;
+    padding: 6px 0;
+}
+
+.cal-tabla td {
+    height: 44px;
+    text-align: center;
+    vertical-align: top;
+    border: 1px solid #f3e4ec;
+    font-size: 14px;
+    color: #444;
+    padding-top: 4px;
+}
+
+.cal-tabla td.fuera {
+    color: #ccc;
+    background: #fcfcfc;
+}
+
+.cal-tabla td.hoy {
+    background: #fff3cd;
+    font-weight: bold;
+}
+
+.cal-tabla .punto {
+    display: block;
+    color: #d9534f;
+    font-size: 11px;
+    line-height: 1;
+}
+
+.evento-fila {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #f3e4ec;
+    font-size: 14px;
+    color: #444;
+}
+
+.evento-fila form {
+    margin: 0;
+}
+
+.evento-info small {
+    color: #999;
+}
+
+.evento-ok {
+    display: block;
+    color: #256029;
+    font-size: 12px;
+}
+
+.cal-form {
+    margin-top: 16px;
+}
+
+/* ── PEDIDOS GUARDADOS ── */
+.pedido-card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 14px;
+    margin-bottom: 12px;
+    border: 1px solid #f3e4ec;
+    border-radius: 16px;
+    background: #fff;
+}
+
+.pedido-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    font-size: 13px;
+    color: #666;
+}
+
+.pedido-info strong {
+    font-size: 16px;
+    color: #333;
+}
+
+.pedido-acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+
+.pedido-acciones form {
+    margin: 0;
+}
+
+/* ── PRODUCTOS (panel administradora) ── */
+.prod-fila {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.prod-fila input {
+    margin-bottom: 0;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.prod-fila .cod {
+    flex: 0 0 90px;
+    width: 90px;
+}
+
+.prod-fila input:nth-child(2) {
+    flex: 1;
+}
+
+/* ── LOGIN ── */
+.fondo-login {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    box-sizing: border-box;
+    background: linear-gradient(170deg, #a83a45 0%, #d9707a 40%, #ecc9d6 75%, #e4dfe3 100%);
+    font-family: 'Poppins', Arial, sans-serif;
+}
+
+.login-cabecera {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.login-titulo {
+    margin: 0;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 900;
+    font-size: 54px;
+    line-height: 1.1;
+    background: linear-gradient(90deg, #e6960a, #e8c21a);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: none;
+    filter: drop-shadow(0 2px 6px rgba(120, 60, 0, 0.35));
+}
+
+.login-sub {
+    margin: 8px 0 0 0;
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.login-card {
+    width: 420px;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 34px 32px 30px 32px;
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.78);
+    box-shadow: 0 10px 40px rgba(90, 20, 30, 0.25);
+}
+
+.login-card label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #4a2f3a;
+}
+
+.login-card input {
+    margin-bottom: 22px;
+    padding: 16px;
+    border: none;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.85);
+    font-family: 'Poppins', Arial, sans-serif;
+}
+
+.login-error {
+    margin-bottom: 16px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: #fdecea;
+    color: #a94442;
+    font-size: 13px;
+    text-align: center;
+}
+
+.login-card .login-btn {
+    margin-top: 6px;
+    padding: 16px;
+    border-radius: 14px;
+    background: #e0555a;
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+
+.login-card .login-btn:hover {
+    box-shadow: 0 6px 20px rgba(224, 85, 90, 0.5);
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 540px) {
     .contenedor {
         width: 95%;
         padding: 24px 16px;
     }
+    .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 14px 12px;
+    }
     .dal-izq, .dal-der {
         font-size: 10px;
         letter-spacing: 4px;
+    }
+    .login-titulo {
+        font-size: 42px;
+    }
+    .login-card {
+        padding: 26px 20px;
     }
 }

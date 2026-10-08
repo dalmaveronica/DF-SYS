@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DALMA FRANCO</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .pedido-card {
+            border: 1px solid #e3d3dc;
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-bottom: 12px;
+            background: #fff;
+            text-align: left;
+        }
+        .pedido-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .pedido-cliente { font-size: 17px; font-weight: bold; margin: 0; }
+        .pedido-meta { font-size: 13px; color: #666; margin: 2px 0 0; }
+        .pedido-entrega {
+            background: #faeeda;
+            color: #854f0b;
+            border-radius: 8px;
+            padding: 4px 10px;
+            font-size: 13px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        .pedido-items {
+            margin: 8px 0 0;
+            padding-left: 18px;
+            font-size: 13px;
+            color: #333;
+        }
+        .pedido-acciones {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .pedido-acciones a,
+        .pedido-acciones button {
+            font-size: 13px;
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: 1px solid #d4537e;
+            background: #fff;
+            color: #993556;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .pedido-acciones form { margin: 0; }
+        .pedido-vacio { color: #666; text-align: center; padding: 20px 0; }
+    </style>
+</head>
+
+<body class="fondo">
+
+    {% include "_cabecera.html" %}
+
+    <div class="contenedor">
+
+        <h1>{% if es_admin %}TODOS LOS PEDIDOS 📁{% else %}MIS PEDIDOS 📁{% endif %}</h1>
+
+        {% if lista %}
+            {% for p in lista %}
+            <div class="pedido-card">
+
+                <div class="pedido-top">
+                    <div>
+                        <p class="pedido-cliente">{{ p.cliente }}</p>
+                        <p class="pedido-meta">
+                            {% if p.razon %}{{ p.razon }} · {% endif %}
+                            {% if p.zona %}Zona {{ p.zona }} · {% endif %}
+                            Vendedor: {{ p.vendedor }}
+                        </p>
+                        <p class="pedido-meta">
+                            Enviado: {{ p.fecha_envio }}{% if p.editado %} · editado{% endif %}
+                        </p>
+                    </div>
+                    <div class="pedido-entrega">Entrega: {{ p.fecha_entrega }}</div>
+                </div>
+
+                {# p.get evita el error en pedidos viejos que no tienen la clave "items" #}
+                {% set lista_items = p.get('items') or [] %}
+                {% if lista_items %}
+                <ul class="pedido-items">
+                    {% for it in lista_items %}
+                    <li>{{ it.producto }} — <strong>{{ it.cantidad }}</strong></li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
+                {% if p.nota %}
+                <p class="pedido-meta">Nota: {{ p.nota }}</p>
+                {% endif %}
+
+                <div class="pedido-acciones">
+                    <a href="/ver_pdf/{{ p.pdf }}">📄 Ver PDF</a>
+                    {% if es_admin %}
+                    <a href="/pedido/{{ p.id }}/editar">✏️ Editar</a>
+                    <form action="/pedidos/{{ p.id }}/borrar" method="POST"
+                          onsubmit="return confirm('¿Borrar este pedido? No se puede deshacer.');">
+                        <button type="submit">🗑️ Borrar</button>
+                    </form>
+                    {% endif %}
+                </div>
+
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="pedido-vacio">Todavía no hay pedidos guardados.</p>
+        {% endif %}
+
+    </div>
+
+</body>
+</html>

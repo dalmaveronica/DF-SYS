@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Panel — DF System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="fondo">
+
+    {% include "_cabecera.html" %}
+
+    {% if seccion == "inicio" %}
+
+    <div class="contenedor ancho">
+        <h1>Hola, {{ usuario }} ✨</h1>
+        <p class="fecha">Panel de administradora</p>
+    </div>
+
+    <div class="contenedor ancho">
+        {% include "_calendario.html" %}
+    </div>
+
+
+    {% elif seccion == "productos" %}
+
+    <div class="contenedor ancho">
+
+        <h1>Productos 📦</h1>
+
+        {% if request.args.get('ok') %}
+        <div class="ok">✅ Guardado</div>
+        {% endif %}
+
+        <h2>Agregar producto</h2>
+        <form method="POST" action="/admin/productos/agregar">
+            <input type="text" name="codigo" placeholder="Código" required>
+            <input type="text" name="nombre" placeholder="Nombre" required>
+            <button type="submit">+ Agregar producto</button>
+        </form>
+
+        <h2>Cargados ({{ productos|length }})</h2>
+
+        <input type="text" id="buscar" placeholder="🔎 Buscar por código o nombre" onkeyup="filtrar()">
+
+        {% for p in productos %}
+        <form method="POST" action="/admin/productos/{{ loop.index0 }}/guardar" class="prod-fila">
+            <input type="text" name="codigo" value="{{ p.codigo }}" class="cod" required>
+            <input type="text" name="nombre" value="{{ p.nombre }}" required>
+            <button type="submit" class="btn-mini">💾</button>
+            <button type="submit" class="btn-mini rojo" formaction="/admin/productos/{{ loop.index0 }}/borrar"
+                    formnovalidate onclick="return confirm('¿Borrar este producto?')">🗑️</button>
+        </form>
+        {% endfor %}
+
+    </div>
+
+    <script>
+        function filtrar() {
+            var q = document.getElementById("buscar").value.toLowerCase();
+            document.querySelectorAll(".prod-fila").forEach(function (fila) {
+                var texto = Array.from(fila.querySelectorAll("input"))
+                    .map(function (i) { return i.value; }).join(" ").toLowerCase();
+                fila.style.display = texto.indexOf(q) > -1 ? "" : "none";
+            });
+        }
+    </script>
+
+
+    {% elif seccion == "hoja" %}
+
+    <div class="contenedor ancho">
+
+        <h1>Hoja de pedido 🖨️</h1>
+
+        {% if request.args.get('ok') %}
+        <div class="ok">✅ Guardado. Se aplica a los próximos PDF.</div>
+        {% endif %}
+
+        <form method="POST" action="/admin/hoja">
+
+            <label class="label-fecha">Encabezado (arriba a la izquierda del PDF)</label>
+            <input type="text" name="encabezado" value="{{ cfg.encabezado }}" maxlength="40">
+
+            <h2>Frase de cada día</h2>
+
+            {% for dia in dias %}
+            <label class="label-fecha">{{ dia }}</label>
+            <textarea name="nota_{{ loop.index0 }}" rows="5" placeholder="Sin frase">{{ notas.get(dia, '') }}</textarea>
+            {% endfor %}
+
+            <button type="submit">💾 Guardar hoja de pedido</button>
+
+        </form>
+
+    </div>
+
+    {% endif %}
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+{% set cal = calendario() %}
+
+<style>
+    .cal-ev {
+        display: block;
+        font-size: 10px;
+        line-height: 1.2;
+        margin-top: 2px;
+        word-break: break-word;
+    }
+    .cal-ev .estrella { color: #e0a800; }
+    .cal-tabla td.con-evento {
+        background: #d6ecff;
+        color: #1b2a3a;
+    }
+    .cal-tabla td.con-evento .num { font-weight: bold; }
+</style>
+
+<div class="calendario">
+
+    <h2>📅 Calendario</h2>
+
+    <div class="cal-nav">
+        <a href="?mes={{ cal.prev }}">◀️</a>
+        <strong>{{ cal.titulo }}</strong>
+        <a href="?mes={{ cal.sig }}">▶️</a>
+    </div>
+
+    <table class="cal-tabla">
+        <tr>
+            <th>L</th><th>M</th><th>M</th><th>J</th><th>V</th><th>S</th><th>D</th>
+        </tr>
+        {% for semana in cal.semanas %}
+        <tr>
+            {% for d in semana %}
+            <td class="{% if not d.del_mes %}fuera{% endif %} {% if d.hoy %}hoy{% endif %} {% if d.eventos %}con-evento{% endif %}">
+                <span class="num">{{ d.fecha.day }}</span>
+                {% for ev in d.eventos %}
+                <span class="cal-ev"><span class="estrella">★</span> {{ ev.titulo }}</span>
+                {% endfor %}
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+
+    <div class="cal-eventos">
+        {% if not cal.eventos_mes %}
+        <p class="vacio">No hay eventos este mes.</p>
+        {% endif %}
+        {% for e in cal.eventos_mes %}
+        <div class="evento-fila">
+            <div class="evento-info">
+                <strong>{{ e.fecha[8:10] }}/{{ e.fecha[5:7] }}</strong> — <span class="estrella" style="color:#e0a800;">★</span> {{ e.titulo }}
+                <small>({{ e.creado_por }})</small>
+                {% if e.cantidades_pasadas %}<span class="evento-ok">✅ cantidades pasadas</span>{% endif %}
+            </div>
+            {% if es_admin or e.creado_por == usuario %}
+            <form method="POST" action="/calendario/{{ e.id }}/borrar"
+                  onsubmit="return confirm('¿Borrar este evento?')">
+                <input type="hidden" name="volver" value="{{ request.full_path }}">
+                <button type="submit" class="btn-mini rojo">🗑️</button>
+            </form>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <form method="POST" action="/calendario/agregar" class="cal-form">
+        <input type="hidden" name="volver" value="{{ request.full_path }}">
+        <label class="label-fecha">➕ Nuevo evento</label>
+        <input type="date" name="fecha" required>
+        <input type="text" name="titulo" placeholder="Ej: Gran venta de pastas" maxlength="80" required>
+        <button type="submit">Agregar al calendario</button>
+    </form>
+
+</div>

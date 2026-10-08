@@ -1,0 +1,20 @@
+{
+  "id": "Pedido_07-10-2026_22-20-59",
+  "vendedor": "DALMA",
+  "creado_por": "DALMA",
+  "cliente": "MNCSDGER",
+  "razon": "",
+  "zona": "FG",
+  "fecha_entrega": "10 / 10 / 2026",
+  "fecha_entrega_iso": "2026-10-10",
+  "nota": "",
+  "items": [
+    {
+      "producto": "55064-11 - Raviol pollo con verdura",
+      "cantidad": "4"
+    }
+  ],
+  "detalle_productos": "  • Raviol pollo con verdura x4\n",
+  "pdf": "Pedido_07-10-2026_22-20-59.pdf",
+  "fecha_envio": "07/10/2026 22:20"
+}

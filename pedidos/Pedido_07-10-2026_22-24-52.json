@@ -1,0 +1,20 @@
+{
+  "id": "Pedido_07-10-2026_22-24-52",
+  "vendedor": "DALMA",
+  "creado_por": "DALMA",
+  "cliente": " DV.,S MFB",
+  "razon": "",
+  "zona": "",
+  "fecha_entrega": "09 / 10 / 2026",
+  "fecha_entrega_iso": "2026-10-09",
+  "nota": "",
+  "items": [
+    {
+      "producto": "55060-11 - Raviol cordero",
+      "cantidad": "4"
+    }
+  ],
+  "detalle_productos": "  • Raviol cordero x4\n",
+  "pdf": "Pedido_07-10-2026_22-24-52.pdf",
+  "fecha_envio": "07/10/2026 22:24"
+}

@@ -1,0 +1,41 @@
+<!-- DAL FRANCO flotando a los costados -->
+<div class="dal-izq">DALMA FRANCO</div>
+<div class="dal-der">DALMA FRANCO</div>
+
+<!-- Barra superior -->
+<div class="top-bar">
+    <div class="top-links">
+        {% if es_admin %}
+        <a href="/admin" class="btn-nav">🏠 Panel</a>
+        <a href="/pedido" class="btn-nav">📝 Nuevo pedido</a>
+        <a href="/pedidos" class="btn-nav">📁 Pedidos</a>
+        <a href="/admin/productos" class="btn-nav">📦 Productos</a>
+        <a href="/admin/hoja" class="btn-nav">🖨️ Hoja de pedido</a>
+        {% else %}
+        <a href="/pedido" class="btn-nav">📝 Nuevo pedido</a>
+        <a href="/pedidos" class="btn-nav">📁 Mis pedidos</a>
+        {% endif %}
+        <a href="/logout" class="btn-salir">✖️ Salir</a>
+    </div>
+    <div class="fecha-top">{{ fecha_actual }}</div>
+</div>
+
+<!-- Cartel: pasar cantidades (desaparece al marcarlo) -->
+{% for c in carteles() %}
+<div class="cartel">
+    <div class="cartel-texto">
+        ⚠️ <strong>PASAR CANTIDADES</strong><br>
+        {{ c.titulo }} — {{ c.fecha[8:10] }}/{{ c.fecha[5:7] }}
+        <span class="cartel-dias">
+            {% if c.dias == 0 %}(es HOY)
+            {% elif c.dias == 1 %}(es mañana)
+            {% elif c.dias > 1 %}(en {{ c.dias }} días)
+            {% else %}(pasó hace {{ -c.dias }} días){% endif %}
+        </span>
+    </div>
+    <form method="POST" action="/calendario/{{ c.id }}/cantidades">
+        <input type="hidden" name="volver" value="{{ request.full_path }}">
+        <button type="submit">✅ Ya pasé las cantidades</button>
+    </form>
+</div>
+{% endfor %}
