@@ -89,34 +89,6 @@ def guardar_json(nombre, datos):
 
 DIAS = ["LUNES", "MARTES", "MIÉRCOLES", "JUEVES", "VIERNES", "SÁBADO", "DOMINGO"]
 
-NOTAS_DEFECTO = {
-    "LUNES": "Hoy toca: Lunes - Airbag\n\nMientras más me apuren...\nmás me voy a tardar. 😂",
-
-    "MARTES": "Sabemos que cada pedido refleja el esfuerzo de todo el equipo.\n"
-              "¡Gracias por dar lo mejor de ustedes!\n"
-              "¡Buena jornada!",
-
-    "MIÉRCOLES": "\"Despacio, que estoy apurada.\"\n"
-                 "¡Ya estamos en mitad de semana!",
-
-    "JUEVES": "Nunca es tarde para aprender algo nuevo.\n\n"
-              "Vocabulario:\n"
-              "• Envasado → con V\n"
-              "PARA TENER EN CUENTA!!!!:\n"
-              "Revisar 25 veces las bandejas, mirarme fijo o respirar al lado mío\n"
-              "no acelera la preparación de los pedidos.\n\n"
-              "PD:¡Que nunca falten los mates!",
-
-    "VIERNES": "Después de toda una semana de trabajo...\n"
-               "por fin llegamos a juntar para el asado.\n\n"
-               "¡QUE TENGAN UN BENDECIDO DIA!",
-
-    "SÁBADO": "¡Sábado 1 de Agosto!\n\n"
-              "Dia del TÉ de ruda para arrancar el mes con salud,suerte y buenas energias.\n\n"
-              "Que no falten las facturitas.\n\n"
-              "Buen fin de semana ♡"
-}
-
 CONFIG_DEFECTO = {"encabezado": "★ DALMA FRANCO ★"}
 
 # --------------------------------
