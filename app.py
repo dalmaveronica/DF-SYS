@@ -31,7 +31,7 @@ app.secret_key = os.environ.get("SECRET_KEY", "DALMA FRANCO")
 # Si en Render agregás un disco persistente, definí DATA_DIR con su ruta
 # (ej: /var/data) y los datos sobreviven a cada actualización.
 
-BASE_DIR = os.path.dirname(os.path.abspath(_file_))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.environ.get("DATA_DIR", BASE_DIR)
 os.makedirs(DATA_DIR, exist_ok=True)
 
