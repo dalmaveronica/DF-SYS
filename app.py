@@ -31,7 +31,7 @@ app.secret_key = os.environ.get("SECRET_KEY", "DALMA FRANCO")
 # Si en Render agregás un disco persistente, definí DATA_DIR con su ruta
 # (ej: /var/data) y los datos sobreviven a cada actualización.
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(os.path.abspath(_file_))
 DATA_DIR = os.environ.get("DATA_DIR", BASE_DIR)
 os.makedirs(DATA_DIR, exist_ok=True)
 
@@ -48,6 +48,78 @@ def ahora():
 
 def hoy():
     return ahora().date()
+
+
+# --------------------------------
+# BASE DE DATOS (Neon / PostgreSQL)
+# --------------------------------
+# Si existe la variable DATABASE_URL, los datos se guardan en la base y
+# sobreviven a los reinicios de Render. Si no existe, se usan archivos
+# como siempre (por ejemplo, cuando probás en tu compu).
+
+DATABASE_URL = os.environ.get("DATABASE_URL", "")
+USAR_DB = bool(DATABASE_URL)
+
+if USAR_DB:
+    import psycopg
+    from psycopg.types.json import Jsonb
+
+_conexion = None
+
+SQL_GUARDAR_JSON = (
+    "INSERT INTO datos (nombre, contenido, actualizado) VALUES (%s, %s, now()) "
+    "ON CONFLICT (nombre) DO UPDATE "
+    "SET contenido = EXCLUDED.contenido, actualizado = now()"
+)
+SQL_GUARDAR_PDF = (
+    "INSERT INTO pdfs (nombre, contenido) VALUES (%s, %s) "
+    "ON CONFLICT (nombre) DO UPDATE SET contenido = EXCLUDED.contenido"
+)
+
+
+def db_ejecutar(sql, params=None, fetch=None):
+    """Ejecuta una consulta reusando la conexión; si se cortó, reconecta una vez."""
+    global _conexion
+    for intento in (1, 2):
+        try:
+            if _conexion is None or _conexion.closed:
+                _conexion = psycopg.connect(
+                    DATABASE_URL, autocommit=True, prepare_threshold=None
+                )
+            with _conexion.cursor() as cur:
+                cur.execute(sql, params)
+                if fetch == "uno":
+                    return cur.fetchone()
+                if fetch == "todos":
+                    return cur.fetchall()
+                return None
+        except psycopg.OperationalError:
+            try:
+                if _conexion is not None:
+                    _conexion.close()
+            except Exception:
+                pass
+            _conexion = None
+            if intento == 2:
+                raise
+
+
+def crear_tablas():
+    db_ejecutar(
+        "CREATE TABLE IF NOT EXISTS datos ("
+        "nombre TEXT PRIMARY KEY, "
+        "contenido JSONB NOT NULL, "
+        "actualizado TIMESTAMPTZ NOT NULL DEFAULT now())"
+    )
+    db_ejecutar(
+        "CREATE TABLE IF NOT EXISTS pdfs ("
+        "nombre TEXT PRIMARY KEY, "
+        "contenido BYTEA NOT NULL)"
+    )
+
+
+if USAR_DB:
+    crear_tablas()
 
 
 # --------------------------------
@@ -70,6 +142,11 @@ def abrir_json(camino):
 
 
 def leer_json(nombre, defecto):
+    if USAR_DB:
+        fila = db_ejecutar(
+            "SELECT contenido FROM datos WHERE nombre = %s", (nombre,), "uno"
+        )
+        return fila[0] if fila else defecto
     try:
         return abrir_json(ruta(nombre))
     except (FileNotFoundError, json.JSONDecodeError, ValueError):
@@ -77,6 +154,9 @@ def leer_json(nombre, defecto):
 
 
 def guardar_json(nombre, datos):
+    if USAR_DB:
+        db_ejecutar(SQL_GUARDAR_JSON, (nombre, Jsonb(datos)))
+        return
     with open(ruta(nombre), "w", encoding="utf-8") as archivo:
         json.dump(datos, archivo, ensure_ascii=False, indent=2)
 
@@ -90,13 +170,25 @@ def guardar_json(nombre, datos):
 DIAS = ["LUNES", "MARTES", "MIÉRCOLES", "JUEVES", "VIERNES", "SÁBADO", "DOMINGO"]
 
 CONFIG_DEFECTO = {"encabezado": "★ DALMA FRANCO ★"}
+NOTAS_DEFECTO = {dia: "" for dia in DIAS}
 
 # --------------------------------
 # CREAR ARCHIVOS SI NO EXISTEN
-# (si ya existen en el proyecto, se copian tal cual a DATA_DIR)
+# (si ya existen en el proyecto, se copian tal cual a DATA_DIR
+#  o, con base de datos, se cargan en ella la primera vez)
 # --------------------------------
 
 def inicializar(nombre, defecto):
+    if USAR_DB:
+        if db_ejecutar("SELECT 1 FROM datos WHERE nombre = %s", (nombre,), "uno"):
+            return
+        origen = os.path.join(BASE_DIR, nombre)
+        try:
+            guardar_json(nombre, abrir_json(origen))
+        except (FileNotFoundError, json.JSONDecodeError, ValueError):
+            guardar_json(nombre, defecto)
+        return
+
     destino = ruta(nombre)
     if os.path.exists(destino):
         return
@@ -117,6 +209,37 @@ inicializar("usuarios.json", {"Dalma": "cambiar-esta-clave", "Walter": "cambiar-
 inicializar("notas.json", NOTAS_DEFECTO)
 inicializar("config.json", CONFIG_DEFECTO)
 inicializar("eventos.json", [])
+
+
+def migrar_pedidos_existentes():
+    """Una sola vez: pasa a la base los pedidos (json y pdf) que ya estaban en la carpeta."""
+    if not USAR_DB:
+        return
+    if db_ejecutar("SELECT 1 FROM datos WHERE nombre = %s", ("_migrado_pedidos",), "uno"):
+        return
+    for archivo in os.listdir(PEDIDOS_DIR):
+        camino = os.path.join(PEDIDOS_DIR, archivo)
+        if archivo.endswith(".json"):
+            try:
+                contenido = abrir_json(camino)
+            except (json.JSONDecodeError, ValueError, OSError):
+                continue
+            db_ejecutar(
+                "INSERT INTO datos (nombre, contenido, actualizado) VALUES (%s, %s, now()) "
+                "ON CONFLICT (nombre) DO NOTHING",
+                ("pedidos/" + archivo, Jsonb(contenido))
+            )
+        elif archivo.endswith(".pdf"):
+            with open(camino, "rb") as f:
+                db_ejecutar(
+                    "INSERT INTO pdfs (nombre, contenido) VALUES (%s, %s) "
+                    "ON CONFLICT (nombre) DO NOTHING",
+                    (archivo[:-4], f.read())
+                )
+    guardar_json("_migrado_pedidos", True)
+
+
+migrar_pedidos_existentes()
 
 # --------------------------------
 # ROLES Y PERMISOS
@@ -158,10 +281,61 @@ def id_valido(pid):
 def cargar_pedido(pid):
     if not id_valido(pid):
         return None
-    try:
-        return abrir_json(os.path.join(PEDIDOS_DIR, pid + ".json"))
-    except (FileNotFoundError, json.JSONDecodeError, ValueError):
-        return None
+    datos = leer_json("pedidos/" + pid + ".json", None)
+    return datos if isinstance(datos, dict) else None
+
+
+def guardar_pdf(pid):
+    """Con base de datos, guarda también una copia del PDF generado."""
+    if not USAR_DB:
+        return
+    with open(os.path.join(PEDIDOS_DIR, pid + ".pdf"), "rb") as f:
+        db_ejecutar(SQL_GUARDAR_PDF, (pid, f.read()))
+
+
+def asegurar_pdf(pid):
+    """Si el PDF no está en la carpeta (por un reinicio), lo recupera de la base."""
+    destino = os.path.join(PEDIDOS_DIR, pid + ".pdf")
+    if USAR_DB and not os.path.exists(destino):
+        fila = db_ejecutar("SELECT contenido FROM pdfs WHERE nombre = %s", (pid,), "uno")
+        if fila:
+            with open(destino, "wb") as f:
+                f.write(bytes(fila[0]))
+    return os.path.exists(destino)
+
+
+def listar_pedidos():
+    """Todos los pedidos guardados, del más nuevo al más viejo."""
+    lista = []
+    if USAR_DB:
+        filas = db_ejecutar(
+            "SELECT nombre, contenido FROM datos WHERE nombre LIKE %s "
+            "ORDER BY actualizado DESC",
+            ("pedidos/%",), "todos"
+        )
+        for nombre, p in filas:
+            if not isinstance(p, dict):
+                continue
+            p.setdefault("id", nombre[len("pedidos/"):-5])
+            p.setdefault("pdf", p["id"] + ".pdf")
+            lista.append(p)
+        return lista
+
+    for archivo in os.listdir(PEDIDOS_DIR):
+        if not archivo.endswith(".json"):
+            continue
+        camino = os.path.join(PEDIDOS_DIR, archivo)
+        try:
+            p = abrir_json(camino)
+        except (json.JSONDecodeError, ValueError, OSError):
+            continue
+        if not isinstance(p, dict):
+            continue
+        p.setdefault("id", archivo[:-5])
+        p.setdefault("pdf", p["id"] + ".pdf")
+        lista.append((os.path.getmtime(camino), p))
+    lista.sort(key=lambda x: x[0], reverse=True)
+    return [p for _, p in lista]
 
 
 def puede_ver(pedido):
@@ -644,9 +818,12 @@ def generar():
 
     pdf.save()
 
+    id_pedido = nombre_pdf[:-4]
+    guardar_pdf(id_pedido)
+
     # Guardar JSON (el pedido queda guardado para volver a verlo)
     datos = {
-        "id":                nombre_pdf[:-4],
+        "id":                id_pedido,
         "vendedor":          vendedor,
         "creado_por":        creado_por,
         "cliente":           cliente,
@@ -663,8 +840,7 @@ def generar():
     if previo is not None:
         datos["editado"] = True
 
-    with open(os.path.join(PEDIDOS_DIR, nombre_pdf[:-4] + ".json"), "w", encoding="utf-8") as f:
-        json.dump(datos, f, ensure_ascii=False, indent=2)
+    guardar_json("pedidos/" + id_pedido + ".json", datos)
 
     return redirect(f"/ver_pdf/{nombre_pdf}")
 
@@ -705,6 +881,7 @@ def pdf_archivo(nombre):
             abort(404)
     elif not puede_ver(pedido):
         abort(403)
+    asegurar_pdf(pid)
     return send_from_directory(directory=PEDIDOS_DIR, path=pid + ".pdf", as_attachment=True)
 
 
@@ -716,29 +893,17 @@ def pdf_archivo(nombre):
 @app.route("/pedidos")
 @login_requerido
 def ver_pedidos():
-    lista = []
-    for archivo in os.listdir(PEDIDOS_DIR):
-        if not archivo.endswith(".json"):
-            continue
-        camino = os.path.join(PEDIDOS_DIR, archivo)
-        try:
-            p = abrir_json(camino)
-        except (json.JSONDecodeError, ValueError, OSError):
-            continue
-        if not isinstance(p, dict):
-            continue
-        p.setdefault("id", archivo[:-5])
-        p.setdefault("pdf", p["id"] + ".pdf")
-        if puede_ver(p):
-            lista.append((os.path.getmtime(camino), p))
-    lista.sort(key=lambda x: x[0], reverse=True)
-    return render_template("pedidos.html", lista=[p for _, p in lista])
+    lista = [p for p in listar_pedidos() if puede_ver(p)]
+    return render_template("pedidos.html", lista=lista)
 
 
 @app.route("/pedidos/<pid>/borrar", methods=["POST"])
 @admin_requerido
 def borrar_pedido(pid):
     if id_valido(pid):
+        if USAR_DB:
+            db_ejecutar("DELETE FROM datos WHERE nombre = %s", ("pedidos/" + pid + ".json",))
+            db_ejecutar("DELETE FROM pdfs WHERE nombre = %s", (pid,))
         for extension in (".json", ".pdf"):
             try:
                 os.remove(os.path.join(PEDIDOS_DIR, pid + extension))
