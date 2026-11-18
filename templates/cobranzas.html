@@ -111,7 +111,7 @@
             <p class="fecha">Todas las facturas · aviso en rojo cuando faltan {{ dias_aviso }} días o menos</p>
 
             {% if error == 'cliente' %}
-            <div class="cob-error">⚠️ Ese cliente no existe. Elegí uno de la lista (si es nuevo, que lo cargue Dalma en Clientes).</div>
+            <div class="cob-error">⚠️ Completá el número y el nombre del cliente.</div>
             {% elif error == 'factura' %}
             <div class="cob-error">⚠️ Falta el número de factura.</div>
             {% elif error == 'importe' %}
@@ -127,7 +127,7 @@
                 <div class="cob-form-fila">
                     <input type="text" name="numero_cliente" id="numeroCliente" list="listaNumeros" inputmode="numeric"
                            placeholder="N° de cliente" autocomplete="off" required>
-                    <input type="text" id="nombreCliente" list="listaNombres"
+                    <input type="text" name="cliente" id="nombreCliente" list="listaNombres"
                            placeholder="Nombre del cliente" autocomplete="off" required>
                 </div>
                 <datalist id="listaNumeros">
@@ -249,15 +249,6 @@
         inNombre.addEventListener("input", function () {
             var c = clientePorNombre(inNombre.value);
             if (c) { inNumero.value = c.numero; }
-        });
-
-        document.getElementById("formCobro").addEventListener("submit", function (e) {
-            var c = clientePorNumero(inNumero.value);
-            if (!c || String(c.nombre).toLowerCase() !== inNombre.value.trim().toLowerCase()) {
-                e.preventDefault();
-                alert("Elegí un cliente de la lista (escribí el número o el nombre y seleccionalo).");
-                inNumero.focus();
-            }
         });
     </script>
 
