@@ -22,8 +22,23 @@
             <input type="hidden" name="pedido_id" value="{{ edit.id }}">
             {% endif %}
 
-            <input type="text" name="cliente" placeholder="Cliente" value="{{ edit.cliente if edit else '' }}" required>
-            <input type="text" name="razon" placeholder="Razón Social (Opcional)" value="{{ edit.razon if edit else '' }}">
+            <!-- Cliente: se completa solo al escribir el número o el nombre -->
+            <input type="text" name="numero_cliente" id="numeroCliente" list="listaNumeros" inputmode="numeric"
+                   placeholder="N° de cliente" autocomplete="off"
+                   value="{{ edit.numero_cliente if edit else '' }}" required>
+            <input type="text" name="cliente" id="nombreCliente" list="listaNombres"
+                   placeholder="Nombre del cliente" autocomplete="off"
+                   value="{{ edit.cliente if edit else '' }}" required>
+            <datalist id="listaNumeros">
+                {% for c in clientes %}
+                <option value="{{ c.numero }}" label="{{ c.nombre }}">
+                {% endfor %}
+            </datalist>
+            <datalist id="listaNombres">
+                {% for c in clientes %}
+                <option value="{{ c.nombre }}" label="N° {{ c.numero }}">
+                {% endfor %}
+            </datalist>
             <input type="text" name="zona" placeholder="Zona" value="{{ edit.zona if edit else '' }}">
 
             <!-- Vendedor: la administradora elige, el vendedor usa su propio usuario -->
@@ -89,6 +104,40 @@
     </div>
 
     <script>
+        // ── Cliente: autocompletado por número o por nombre ──
+        var CLIENTES = {{ clientes | tojson }};
+        var inNumero = document.getElementById("numeroCliente");
+        var inNombre = document.getElementById("nombreCliente");
+
+        function clientePorNumero(n) {
+            n = (n || "").trim().toLowerCase();
+            return CLIENTES.find(function (c) { return String(c.numero).toLowerCase() === n; });
+        }
+        function clientePorNombre(t) {
+            t = (t || "").trim().toLowerCase();
+            return CLIENTES.find(function (c) { return String(c.nombre).toLowerCase() === t; });
+        }
+
+        inNumero.addEventListener("input", function () {
+            var c = clientePorNumero(inNumero.value);
+            if (c) { inNombre.value = c.nombre; }
+        });
+        inNombre.addEventListener("input", function () {
+            var c = clientePorNombre(inNombre.value);
+            if (c) { inNumero.value = c.numero; }
+        });
+
+        // Si hay clientes cargados, no deja enviar un cliente que no existe
+        document.querySelector("form[action='/generar']").addEventListener("submit", function (e) {
+            if (CLIENTES.length === 0) return;
+            var c = clientePorNumero(inNumero.value);
+            if (!c || String(c.nombre).toLowerCase() !== inNombre.value.trim().toLowerCase()) {
+                e.preventDefault();
+                alert("Elegí un cliente de la lista (escribí el número o el nombre y seleccionalo).");
+                inNumero.focus();
+            }
+        });
+
         function agregarProducto() {
             let contenedor = document.getElementById("productos");
             let fila = document.createElement("div");
