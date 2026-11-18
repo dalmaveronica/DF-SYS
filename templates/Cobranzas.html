@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cobranzas — DF System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .cob-error {
+            background: #fdecea;
+            border: 1px solid #e0a09b;
+            color: #8a1f17;
+            border-radius: 12px;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 14px;
+            font-size: 14px;
+        }
+        .cob-form-fila { display: flex; gap: 8px; flex-wrap: wrap; }
+        .cob-form-fila input { flex: 1; min-width: 140px; }
+        .cob-resumen {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 14px;
+            color: #444;
+            margin-bottom: 10px;
+        }
+        .cob-scroll { overflow-x: auto; }
+        .cob-tabla {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            min-width: 640px;
+        }
+        .cob-tabla th {
+            color: #c79b00;
+            font-size: 13px;
+            text-align: left;
+            padding: 8px 6px;
+            border-bottom: 2px solid #f3e4ec;
+        }
+        .cob-tabla td {
+            padding: 8px 6px;
+            border-bottom: 1px solid #f3e4ec;
+            color: #333;
+            vertical-align: middle;
+        }
+        .cob-tabla td.der, .cob-tabla th.der { text-align: right; white-space: nowrap; }
+        .cob-estado { font-size: 12px; font-weight: bold; display: block; }
+
+        /* Semáforo */
+        .cob-tabla tr.fila-urgente td { background: #ffe3e3; }
+        .cob-tabla tr.fila-urgente .cob-estado { color: #b52b27; }
+        .cob-tabla tr.fila-vencida td { background: #f8c9c7; }
+        .cob-tabla tr.fila-vencida .cob-estado { color: #8a1f17; }
+        .cob-tabla tr.fila-cobrada td { color: #999; background: #f6f6f6; }
+        .cob-tabla tr.fila-cobrada .tachar { text-decoration: line-through; }
+        .cob-tabla tr.fila-cobrada .cob-estado { color: #2e7d32; }
+
+        .cob-acciones { display: flex; gap: 6px; justify-content: flex-end; }
+        .cob-acciones form { margin: 0; }
+        .cob-vacio { color: #666; text-align: center; padding: 20px 0; }
+    </style>
+</head>
+
+<body class="fondo">
+
+    {% include "_cabecera.html" %}
+
+    <div class="contenedor ancho">
+
+        <h1>Cobranzas 💰</h1>
+        <p class="fecha">Todas las facturas · aviso en rojo cuando faltan {{ dias_aviso }} días o menos</p>
+
+        {% if error == 'cliente' %}
+        <div class="cob-error">⚠️ Ese cliente no existe. Elegí uno de la lista (si es nuevo, que lo cargue Dalma en Clientes).</div>
+        {% elif error == 'factura' %}
+        <div class="cob-error">⚠️ Falta el número de factura.</div>
+        {% elif error == 'importe' %}
+        <div class="cob-error">⚠️ El importe no es válido. Ejemplo: 125.400,50</div>
+        {% elif error == 'vencimiento' %}
+        <div class="cob-error">⚠️ Falta la fecha de vencimiento.</div>
+        {% endif %}
+
+        <h2>Agregar factura</h2>
+
+        <form method="POST" action="/cobranzas/agregar" id="formCobro">
+
+            <div class="cob-form-fila">
+                <input type="text" name="numero_cliente" id="numeroCliente" list="listaNumeros" inputmode="numeric"
+                       placeholder="N° de cliente" autocomplete="off" required>
+                <input type="text" id="nombreCliente" list="listaNombres"
+                       placeholder="Nombre del cliente" autocomplete="off" required>
+            </div>
+            <datalist id="listaNumeros">
+                {% for c in clientes %}
+                <option value="{{ c.numero }}" label="{{ c.nombre }}">
+                {% endfor %}
+            </datalist>
+            <datalist id="listaNombres">
+                {% for c in clientes %}
+                <option value="{{ c.nombre }}" label="N° {{ c.numero }}">
+                {% endfor %}
+            </datalist>
+
+            <div class="cob-form-fila">
+                <input type="text" name="factura" placeholder="N° de factura" autocomplete="off" required>
+                <input type="text" name="importe" inputmode="decimal" placeholder="Importe (ej: 125.400,50)" autocomplete="off" required>
+            </div>
+
+            <label class="label-fecha">📅 Vencimiento</label>
+            <input type="date" name="vencimiento" required>
+
+            <button type="submit">+ Agregar factura</button>
+        </form>
+
+        <h2>Facturas ({{ lista|length }})</h2>
+
+        {% if lista %}
+        {% set pendientes = lista | rejectattr('cobrada') | list %}
+        <div class="cob-resumen">
+            <span>Pendientes: <strong>{{ pendientes|length }}</strong></span>
+            <span>Total a cobrar: <strong>$ {{ pendientes | sum(attribute='importe') | peso }}</strong></span>
+        </div>
+
+        <div class="cob-scroll">
+        <table class="cob-tabla">
+            <tr>
+                <th>N° cliente</th>
+                <th>Cliente</th>
+                <th>Factura</th>
+                <th class="der">Importe</th>
+                <th>Vencimiento</th>
+                <th></th>
+            </tr>
+            {% for c in lista %}
+            <tr class="fila-{{ c.nivel }}">
+                <td class="tachar">{{ c.numero_cliente }}</td>
+                <td class="tachar">
+                    {{ c.cliente }}
+                    <span class="cob-estado" style="color:#888;font-weight:normal;">cargó {{ c.creado_por }}</span>
+                </td>
+                <td class="tachar">{{ c.factura }}</td>
+                <td class="der tachar">$ {{ c.importe | peso }}</td>
+                <td>
+                    <span class="tachar">{{ c.vencimiento_fmt }}</span>
+                    <span class="cob-estado">
+                        {% if c.nivel == 'cobrada' %}✅ Cobrada
+                        {% elif c.dias is none %}
+                        {% elif c.dias < 0 %}🔴 VENCIDA hace {{ -c.dias }} día{{ 's' if c.dias != -1 }}
+                        {% elif c.dias == 0 %}🔴 VENCE HOY
+                        {% elif c.dias == 1 %}🔴 Vence mañana
+                        {% elif c.nivel == 'urgente' %}🔴 Vence en {{ c.dias }} días
+                        {% else %}Faltan {{ c.dias }} días{% endif %}
+                    </span>
+                </td>
+                <td>
+                    <div class="cob-acciones">
+                        <form method="POST" action="/cobranzas/{{ c.id }}/cobrada">
+                            <button type="submit" class="btn-mini">{% if c.cobrada %}↩️{% else %}✅ Cobrada{% endif %}</button>
+                        </form>
+                        <form method="POST" action="/cobranzas/{{ c.id }}/borrar"
+                              onsubmit="return confirm('¿Borrar esta factura?');">
+                            <button type="submit" class="btn-mini rojo">🗑️</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        </div>
+        {% else %}
+        <p class="cob-vacio">Todavía no cargaste facturas.</p>
+        {% endif %}
+
+    </div>
+
+    <script>
+        // ── Cliente: autocompletado por número o por nombre ──
+        var CLIENTES = {{ clientes | tojson }};
+        var inNumero = document.getElementById("numeroCliente");
+        var inNombre = document.getElementById("nombreCliente");
+
+        function clientePorNumero(n) {
+            n = (n || "").trim().toLowerCase();
+            return CLIENTES.find(function (c) { return String(c.numero).toLowerCase() === n; });
+        }
+        function clientePorNombre(t) {
+            t = (t || "").trim().toLowerCase();
+            return CLIENTES.find(function (c) { return String(c.nombre).toLowerCase() === t; });
+        }
+
+        inNumero.addEventListener("input", function () {
+            var c = clientePorNumero(inNumero.value);
+            if (c) { inNombre.value = c.nombre; }
+        });
+        inNombre.addEventListener("input", function () {
+            var c = clientePorNombre(inNombre.value);
+            if (c) { inNumero.value = c.numero; }
+        });
+
+        document.getElementById("formCobro").addEventListener("submit", function (e) {
+            var c = clientePorNumero(inNumero.value);
+            if (!c || String(c.nombre).toLowerCase() !== inNombre.value.trim().toLowerCase()) {
+                e.preventDefault();
+                alert("Elegí un cliente de la lista (escribí el número o el nombre y seleccionalo).");
+                inNumero.focus();
+            }
+        });
+    </script>
+
+</body>
+</html>
