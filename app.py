@@ -1030,12 +1030,36 @@ def borrar_pedido(pid):
 # Todos los usuarios (vendedores y administradora) ven y cargan todas.
 # --------------------------------
 
+def agrupar_cobranzas(lista):
+    """Agrupa las facturas por cliente (ordenado por número de cliente)."""
+    grupos = {}
+    for c in lista:
+        clave = str(c.get("numero_cliente", ""))
+        g = grupos.setdefault(clave, {
+            "numero": clave, "cliente": c.get("cliente", ""),
+            "facturas": [], "pendiente": 0.0, "alerta": 0
+        })
+        g["facturas"].append(c)   # ya vienen ordenadas: pendientes por vencimiento, cobradas al final
+        if c["nivel"] != "cobrada":
+            g["pendiente"] = round(g["pendiente"] + (c.get("importe") or 0), 2)
+        if c["nivel"] in ("vencida", "urgente"):
+            g["alerta"] += 1
+
+    def orden(g):
+        n = g["numero"]
+        return (0, int(n), "") if n.isdigit() else (1, 0, n.lower())
+
+    return sorted(grupos.values(), key=orden)
+
+
 @app.route("/cobranzas")
 @login_requerido
 def cobranzas():
+    lista = cobranzas_visibles()
     return render_template(
         "cobranzas.html",
-        lista=cobranzas_visibles(),
+        lista=lista,
+        grupos=agrupar_cobranzas(lista),
         clientes=leer_clientes(),
         dias_aviso=DIAS_AVISO_COBRANZA,
         error=request.args.get("error", "")
