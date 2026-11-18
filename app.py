@@ -1070,13 +1070,18 @@ def cobranzas():
 @login_requerido
 def cobranzas_agregar():
     numero = request.form.get("numero_cliente", "").strip()
+    nombre = request.form.get("cliente", "").strip()
     factura = request.form.get("factura", "").strip()
     importe = parsear_importe(request.form.get("importe", ""))
     vencimiento = request.form.get("vencimiento", "").strip()
 
+    # Si el cliente está en la lista se usa su nombre; si no, se acepta
+    # el número y el nombre tal como los escribió.
     cliente = buscar_cliente(numero)
     if cliente is None:
-        return redirect("/cobranzas?error=cliente")
+        if not numero or not nombre:
+            return redirect("/cobranzas?error=cliente")
+        cliente = {"numero": numero[:20], "nombre": nombre[:80]}
     if not factura:
         return redirect("/cobranzas?error=factura")
     if importe is None:
