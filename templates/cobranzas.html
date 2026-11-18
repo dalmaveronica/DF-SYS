@@ -7,6 +7,25 @@
     <title>Cobranzas — DF System</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
+        /* Dos columnas: formulario a la izquierda, planilla a la derecha */
+        .cob-layout {
+            width: 1280px;
+            max-width: 96%;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            margin-bottom: 50px;
+            z-index: 1;
+        }
+        .cob-layout .contenedor { width: auto; padding: 28px; margin-bottom: 0; }
+        .cob-izq { width: 380px; flex-shrink: 0; }
+        .cob-der { flex: 1; min-width: 0; }
+        .cob-tabla tr.fila-vacia td { height: 40px; }
+        @media (max-width: 900px) {
+            .cob-layout { flex-direction: column; align-items: stretch; }
+            .cob-izq { width: auto; }
+        }
+
         .cob-error {
             background: #fdecea;
             border: 1px solid #e0a09b;
@@ -33,7 +52,7 @@
             width: 100%;
             border-collapse: collapse;
             font-size: 14px;
-            min-width: 640px;
+            min-width: 600px;
         }
         .cob-tabla th {
             color: #c79b00;
@@ -60,6 +79,19 @@
         .cob-tabla tr.fila-cobrada .tachar { text-decoration: line-through; }
         .cob-tabla tr.fila-cobrada .cob-estado { color: #2e7d32; }
 
+        /* Agrupado por cliente */
+        .cob-tabla tr.inicio-grupo td { border-top: 3px solid #e8c3d6; }
+        .cob-tabla td.celda-cliente {
+            background: #fff7fb !important;
+            color: #333 !important;
+            vertical-align: top;
+            border-right: 1px solid #f3e4ec;
+        }
+        .cob-tabla td.celda-cliente.con-alerta { border-left: 5px solid #d9534f; }
+        .cob-tabla td.celda-cliente .cli-nombre { font-weight: bold; }
+        .cob-tabla td.celda-cliente .cli-total { display: block; font-size: 12px; color: #666; margin-top: 4px; }
+        .cob-tabla td.celda-cliente .cli-alerta { display: block; font-size: 12px; color: #b52b27; font-weight: bold; margin-top: 2px; }
+
         .cob-acciones { display: flex; gap: 6px; justify-content: flex-end; }
         .cob-acciones form { margin: 0; }
         .cob-vacio { color: #666; text-align: center; padding: 20px 0; }
@@ -70,111 +102,128 @@
 
     {% include "_cabecera.html" %}
 
-    <div class="contenedor ancho">
+    <div class="cob-layout">
 
-        <h1>Cobranzas 💰</h1>
-        <p class="fecha">Todas las facturas · aviso en rojo cuando faltan {{ dias_aviso }} días o menos</p>
+        <!-- ═══ IZQUIERDA: formulario ═══ -->
+        <div class="contenedor cob-izq">
 
-        {% if error == 'cliente' %}
-        <div class="cob-error">⚠️ Ese cliente no existe. Elegí uno de la lista (si es nuevo, que lo cargue Dalma en Clientes).</div>
-        {% elif error == 'factura' %}
-        <div class="cob-error">⚠️ Falta el número de factura.</div>
-        {% elif error == 'importe' %}
-        <div class="cob-error">⚠️ El importe no es válido. Ejemplo: 125.400,50</div>
-        {% elif error == 'vencimiento' %}
-        <div class="cob-error">⚠️ Falta la fecha de vencimiento.</div>
-        {% endif %}
+            <h1>Cobranzas 💰</h1>
+            <p class="fecha">Todas las facturas · aviso en rojo cuando faltan {{ dias_aviso }} días o menos</p>
 
-        <h2>Agregar factura</h2>
+            {% if error == 'cliente' %}
+            <div class="cob-error">⚠️ Ese cliente no existe. Elegí uno de la lista (si es nuevo, que lo cargue Dalma en Clientes).</div>
+            {% elif error == 'factura' %}
+            <div class="cob-error">⚠️ Falta el número de factura.</div>
+            {% elif error == 'importe' %}
+            <div class="cob-error">⚠️ El importe no es válido. Ejemplo: 125.400,50</div>
+            {% elif error == 'vencimiento' %}
+            <div class="cob-error">⚠️ Falta la fecha de vencimiento.</div>
+            {% endif %}
 
-        <form method="POST" action="/cobranzas/agregar" id="formCobro">
+            <h2>Agregar factura</h2>
 
-            <div class="cob-form-fila">
-                <input type="text" name="numero_cliente" id="numeroCliente" list="listaNumeros" inputmode="numeric"
-                       placeholder="N° de cliente" autocomplete="off" required>
-                <input type="text" id="nombreCliente" list="listaNombres"
-                       placeholder="Nombre del cliente" autocomplete="off" required>
-            </div>
-            <datalist id="listaNumeros">
-                {% for c in clientes %}
-                <option value="{{ c.numero }}" label="{{ c.nombre }}">
-                {% endfor %}
-            </datalist>
-            <datalist id="listaNombres">
-                {% for c in clientes %}
-                <option value="{{ c.nombre }}" label="N° {{ c.numero }}">
-                {% endfor %}
-            </datalist>
+            <form method="POST" action="/cobranzas/agregar" id="formCobro">
 
-            <div class="cob-form-fila">
-                <input type="text" name="factura" placeholder="N° de factura" autocomplete="off" required>
-                <input type="text" name="importe" inputmode="decimal" placeholder="Importe (ej: 125.400,50)" autocomplete="off" required>
-            </div>
+                <div class="cob-form-fila">
+                    <input type="text" name="numero_cliente" id="numeroCliente" list="listaNumeros" inputmode="numeric"
+                           placeholder="N° de cliente" autocomplete="off" required>
+                    <input type="text" id="nombreCliente" list="listaNombres"
+                           placeholder="Nombre del cliente" autocomplete="off" required>
+                </div>
+                <datalist id="listaNumeros">
+                    {% for c in clientes %}
+                    <option value="{{ c.numero }}" label="{{ c.nombre }}">
+                    {% endfor %}
+                </datalist>
+                <datalist id="listaNombres">
+                    {% for c in clientes %}
+                    <option value="{{ c.nombre }}" label="N° {{ c.numero }}">
+                    {% endfor %}
+                </datalist>
 
-            <label class="label-fecha">📅 Vencimiento</label>
-            <input type="date" name="vencimiento" required>
+                <div class="cob-form-fila">
+                    <input type="text" name="factura" placeholder="N° de factura" autocomplete="off" required>
+                    <input type="text" name="importe" inputmode="decimal" placeholder="Importe (ej: 125.400,50)" autocomplete="off" required>
+                </div>
 
-            <button type="submit">+ Agregar factura</button>
-        </form>
+                <label class="label-fecha">📅 Vencimiento</label>
+                <input type="date" name="vencimiento" required>
 
-        <h2>Facturas ({{ lista|length }})</h2>
+                <button type="submit">+ Agregar factura</button>
+            </form>
 
-        {% if lista %}
-        {% set pendientes = lista | rejectattr('cobrada') | list %}
-        <div class="cob-resumen">
-            <span>Pendientes: <strong>{{ pendientes|length }}</strong></span>
-            <span>Total a cobrar: <strong>$ {{ pendientes | sum(attribute='importe') | peso }}</strong></span>
         </div>
 
-        <div class="cob-scroll">
-        <table class="cob-tabla">
-            <tr>
-                <th>N° cliente</th>
-                <th>Cliente</th>
-                <th>Factura</th>
-                <th class="der">Importe</th>
-                <th>Vencimiento</th>
-                <th></th>
-            </tr>
-            {% for c in lista %}
-            <tr class="fila-{{ c.nivel }}">
-                <td class="tachar">{{ c.numero_cliente }}</td>
-                <td class="tachar">
-                    {{ c.cliente }}
-                    <span class="cob-estado" style="color:#888;font-weight:normal;">cargó {{ c.creado_por }}</span>
-                </td>
-                <td class="tachar">{{ c.factura }}</td>
-                <td class="der tachar">$ {{ c.importe | peso }}</td>
-                <td>
-                    <span class="tachar">{{ c.vencimiento_fmt }}</span>
-                    <span class="cob-estado">
-                        {% if c.nivel == 'cobrada' %}✅ Cobrada
-                        {% elif c.dias is none %}
-                        {% elif c.dias < 0 %}🔴 VENCIDA hace {{ -c.dias }} día{{ 's' if c.dias != -1 }}
-                        {% elif c.dias == 0 %}🔴 VENCE HOY
-                        {% elif c.dias == 1 %}🔴 Vence mañana
-                        {% elif c.nivel == 'urgente' %}🔴 Vence en {{ c.dias }} días
-                        {% else %}Faltan {{ c.dias }} días{% endif %}
-                    </span>
-                </td>
-                <td>
-                    <div class="cob-acciones">
-                        <form method="POST" action="/cobranzas/{{ c.id }}/cobrada">
-                            <button type="submit" class="btn-mini">{% if c.cobrada %}↩️{% else %}✅ Cobrada{% endif %}</button>
-                        </form>
-                        <form method="POST" action="/cobranzas/{{ c.id }}/borrar"
-                              onsubmit="return confirm('¿Borrar esta factura?');">
-                            <button type="submit" class="btn-mini rojo">🗑️</button>
-                        </form>
-                    </div>
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
+        <!-- ═══ DERECHA: planilla (siempre visible, aunque esté vacía) ═══ -->
+        <div class="contenedor cob-der">
+
+            <h2 style="margin-top:0;">Planilla de facturas ({{ lista|length }})</h2>
+
+            {% set pendientes = lista | rejectattr('cobrada') | list %}
+            <div class="cob-resumen">
+                <span>Pendientes: <strong>{{ pendientes|length }}</strong></span>
+                <span>Total a cobrar: <strong>$ {{ pendientes | sum(attribute='importe') | peso }}</strong></span>
+            </div>
+
+            <div class="cob-scroll">
+            <table class="cob-tabla">
+                <tr>
+                    <th>Cliente</th>
+                    <th>N° de factura</th>
+                    <th class="der">Importe</th>
+                    <th>Vencimiento</th>
+                    <th></th>
+                </tr>
+                {% for g in grupos %}
+                {% for c in g.facturas %}
+                <tr class="fila-{{ c.nivel }}{% if loop.first %} inicio-grupo{% endif %}">
+                    {% if loop.first %}
+                    <td class="celda-cliente{% if g.alerta %} con-alerta{% endif %}" rowspan="{{ g.facturas|length }}">
+                        <span class="cli-nombre">{{ g.cliente }}</span>
+                        <span class="cli-total">N° {{ g.numero }}</span>
+                        <span class="cli-total">Pendiente: <strong>$ {{ g.pendiente | peso }}</strong></span>
+                        {% if g.alerta %}<span class="cli-alerta">🔴 {{ g.alerta }} por vencer / vencida{{ 's' if g.alerta != 1 }}</span>{% endif %}
+                    </td>
+                    {% endif %}
+                    <td class="tachar">{{ c.factura }}<span class="cob-estado" style="color:#888;font-weight:normal;">cargó {{ c.creado_por }}</span></td>
+                    <td class="der tachar">$ {{ c.importe | peso }}</td>
+                    <td>
+                        <span class="tachar">{{ c.vencimiento_fmt }}</span>
+                        <span class="cob-estado">
+                            {% if c.nivel == 'cobrada' %}✅ Cobrada
+                            {% elif c.dias is none %}
+                            {% elif c.dias < 0 %}🔴 VENCIDA hace {{ -c.dias }} día{{ 's' if c.dias != -1 }}
+                            {% elif c.dias == 0 %}🔴 VENCE HOY
+                            {% elif c.dias == 1 %}🔴 Vence mañana
+                            {% elif c.nivel == 'urgente' %}🔴 Vence en {{ c.dias }} días
+                            {% else %}Faltan {{ c.dias }} días{% endif %}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="cob-acciones">
+                            <form method="POST" action="/cobranzas/{{ c.id }}/cobrada">
+                                <button type="submit" class="btn-mini">{% if c.cobrada %}↩️{% else %}✅ Cobrada{% endif %}</button>
+                            </form>
+                            <form method="POST" action="/cobranzas/{{ c.id }}/borrar"
+                                  onsubmit="return confirm('¿Borrar esta factura?');">
+                                <button type="submit" class="btn-mini rojo">🗑️</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% endfor %}
+
+                {# Filas en blanco hasta completar 10, para que se vea la planilla #}
+                {% for i in range([10 - lista|length, 0] | max) %}
+                <tr class="fila-vacia">
+                    <td>&nbsp;</td><td></td><td></td><td></td><td></td>
+                </tr>
+                {% endfor %}
+            </table>
+            </div>
+
         </div>
-        {% else %}
-        <p class="cob-vacio">Todavía no cargaste facturas.</p>
-        {% endif %}
 
     </div>
 
