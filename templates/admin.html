@@ -69,6 +69,56 @@
     </script>
 
 
+    {% elif seccion == "clientes" %}
+
+    <div class="contenedor ancho">
+
+        <h1>Clientes 👥</h1>
+
+        {% if request.args.get('ok') %}
+        <div class="ok">✅ Guardado</div>
+        {% endif %}
+        {% if request.args.get('error') == 'duplicado' %}
+        <div class="ok" style="background:#fdecea;border-color:#e0a09b;color:#8a1f17;">⚠️ Ya existe un cliente con ese número</div>
+        {% elif request.args.get('error') == 'vacio' %}
+        <div class="ok" style="background:#fdecea;border-color:#e0a09b;color:#8a1f17;">⚠️ Completá el número y el nombre</div>
+        {% endif %}
+
+        <h2>Agregar cliente</h2>
+        <form method="POST" action="/admin/clientes/agregar">
+            <input type="text" name="numero" placeholder="N° de cliente" required>
+            <input type="text" name="nombre" placeholder="Nombre del cliente" required>
+            <button type="submit">+ Agregar cliente</button>
+        </form>
+
+        <h2>Cargados ({{ clientes|length }})</h2>
+
+        <input type="text" id="buscarCliente" placeholder="🔎 Buscar por número o nombre" onkeyup="filtrarClientes()">
+
+        {% for c in clientes %}
+        <form method="POST" action="/admin/clientes/{{ loop.index0 }}/guardar" class="prod-fila">
+            <input type="text" name="numero" value="{{ c.numero }}" class="cod" required>
+            <input type="text" name="nombre" value="{{ c.nombre }}" required>
+            <button type="submit" class="btn-mini">💾</button>
+            <button type="submit" class="btn-mini rojo" formaction="/admin/clientes/{{ loop.index0 }}/borrar"
+                    formnovalidate onclick="return confirm('¿Borrar este cliente?')">🗑️</button>
+        </form>
+        {% endfor %}
+
+    </div>
+
+    <script>
+        function filtrarClientes() {
+            var q = document.getElementById("buscarCliente").value.toLowerCase();
+            document.querySelectorAll(".prod-fila").forEach(function (fila) {
+                var texto = Array.from(fila.querySelectorAll("input"))
+                    .map(function (i) { return i.value; }).join(" ").toLowerCase();
+                fila.style.display = texto.indexOf(q) > -1 ? "" : "none";
+            });
+        }
+    </script>
+
+
     {% elif seccion == "hoja" %}
 
     <div class="contenedor ancho">
