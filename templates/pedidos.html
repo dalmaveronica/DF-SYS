@@ -77,7 +77,7 @@
                     <div>
                         <p class="pedido-cliente">{{ p.cliente }}</p>
                         <p class="pedido-meta">
-                            {% if p.razon %}{{ p.razon }} · {% endif %}
+                            {% if p.numero_cliente %}N° {{ p.numero_cliente }} · {% endif %}
                             {% if p.zona %}Zona {{ p.zona }} · {% endif %}
                             Vendedor: {{ p.vendedor }}
                         </p>
