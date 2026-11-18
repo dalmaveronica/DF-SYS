@@ -127,17 +127,6 @@
             if (c) { inNumero.value = c.numero; }
         });
 
-        // Si hay clientes cargados, no deja enviar un cliente que no existe
-        document.querySelector("form[action='/generar']").addEventListener("submit", function (e) {
-            if (CLIENTES.length === 0) return;
-            var c = clientePorNumero(inNumero.value);
-            if (!c || String(c.nombre).toLowerCase() !== inNombre.value.trim().toLowerCase()) {
-                e.preventDefault();
-                alert("Elegí un cliente de la lista (escribí el número o el nombre y seleccionalo).");
-                inNumero.focus();
-            }
-        });
-
         function agregarProducto() {
             let contenedor = document.getElementById("productos");
             let fila = document.createElement("div");
