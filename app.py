@@ -209,6 +209,10 @@ inicializar("usuarios.json", {"Dalma": "cambiar-esta-clave", "Walter": "cambiar-
 inicializar("notas.json", NOTAS_DEFECTO)
 inicializar("config.json", CONFIG_DEFECTO)
 inicializar("eventos.json", [])
+# Clientes: [{"numero": "125", "nombre": "Panadería López"}, ...]
+inicializar("clientes.json", [])
+# Cobranzas: facturas a cobrar, con vencimiento
+inicializar("cobranzas.json", [])
 
 
 def migrar_pedidos_existentes():
@@ -348,6 +352,111 @@ def puede_ver(pedido):
 
 
 # --------------------------------
+# CLIENTES (número + nombre)
+# --------------------------------
+
+def leer_clientes():
+    """Lista de clientes ordenada por número (los numéricos primero, en orden)."""
+    clientes = leer_json("clientes.json", [])
+    if not isinstance(clientes, list):
+        return []
+
+    def clave(c):
+        numero = str(c.get("numero", ""))
+        return (0, int(numero), "") if numero.isdigit() else (1, 0, numero.lower())
+
+    return sorted(clientes, key=clave)
+
+
+def buscar_cliente(numero):
+    numero = str(numero or "").strip().lower()
+    if not numero:
+        return None
+    for c in leer_json("clientes.json", []):
+        if str(c.get("numero", "")).strip().lower() == numero:
+            return c
+    return None
+
+
+# --------------------------------
+# COBRANZAS (facturas por vencer)
+# --------------------------------
+
+DIAS_AVISO_COBRANZA = 2   # avisa cuando faltan este número de días o menos
+
+
+def parsear_importe(texto):
+    """Acepta '1.234,56', '1234,56' o '1234.56' y devuelve un número (o None)."""
+    s = str(texto or "").strip().replace("$", "").replace(" ", "")
+    if not s:
+        return None
+    if "," in s:
+        s = s.replace(".", "").replace(",", ".")
+    elif re.fullmatch(r"\d{1,3}(\.\d{3})+", s):
+        s = s.replace(".", "")
+    try:
+        return round(float(s), 2)
+    except ValueError:
+        return None
+
+
+@app.template_filter("peso")
+def filtro_peso(valor):
+    """Formato argentino: 1234.5 -> '1.234,50'."""
+    try:
+        s = f"{float(valor):,.2f}"
+    except (TypeError, ValueError):
+        return ""
+    return s.replace(",", "X").replace(".", ",").replace("X", ".")
+
+
+def puede_ver_cobranza(c):
+    # Todos los usuarios con sesión iniciada ven todas las facturas.
+    return "usuario" in session
+
+
+def dias_para_vencer(c):
+    try:
+        return (date.fromisoformat(c["vencimiento"]) - hoy()).days
+    except (KeyError, ValueError, TypeError):
+        return None
+
+
+def cobranzas_visibles():
+    """Cobranzas que puede ver el usuario actual, con días y nivel de alerta."""
+    resultado = []
+    for c in leer_json("cobranzas.json", []):
+        if not puede_ver_cobranza(c):
+            continue
+        dias = dias_para_vencer(c)
+        if c.get("cobrada"):
+            nivel = "cobrada"
+        elif dias is None:
+            nivel = "normal"
+        elif dias < 0:
+            nivel = "vencida"
+        elif dias <= DIAS_AVISO_COBRANZA:
+            nivel = "urgente"
+        else:
+            nivel = "normal"
+        try:
+            venc_fmt = date.fromisoformat(c["vencimiento"]).strftime("%d/%m/%Y")
+        except (KeyError, ValueError, TypeError):
+            venc_fmt = c.get("vencimiento", "")
+        resultado.append({**c, "dias": dias, "nivel": nivel, "vencimiento_fmt": venc_fmt})
+    # Pendientes primero (las que vencen antes, arriba); cobradas al final.
+    resultado.sort(key=lambda c: (c["nivel"] == "cobrada", c.get("vencimiento", "")))
+    return resultado
+
+
+def cobranzas_alerta():
+    """Cantidad de facturas vencidas o por vencer (para el cartel / globito rojo)."""
+    if "usuario" not in session:
+        return 0
+    return sum(1 for c in cobranzas_visibles() if c["nivel"] in ("vencida", "urgente"))
+
+
+# --------------------------------
 # CALENDARIO Y CARTEL DE "PASAR CANTIDADES"
 # --------------------------------
 
@@ -422,7 +531,8 @@ def inyectar():
         usuario=session.get("usuario", ""),
         fecha_actual=ahora().strftime("%d/%m/%Y - %H:%M"),
         calendario=construir_calendario,
-        carteles=carteles_pendientes
+        carteles=carteles_pendientes,
+        cobranzas_alerta=cobranzas_alerta
     )
 
 
@@ -507,6 +617,7 @@ def pedido():
     return render_template(
         "pedido.html",
         productos=leer_json("productos.json", []),
+        clientes=leer_clientes(),
         vendedores=list(leer_json("usuarios.json", {}).keys()),
         edit=None
     )
@@ -522,6 +633,7 @@ def editar_pedido(pid):
     return render_template(
         "pedido.html",
         productos=leer_json("productos.json", []),
+        clientes=leer_clientes(),
         vendedores=list(leer_json("usuarios.json", {}).keys()),
         edit=p
     )
@@ -576,11 +688,12 @@ def ajustar(pdf, texto, fuente, tam, ancho_max):
 @login_requerido
 def generar():
 
-    cliente       = request.form["cliente"]
-    razon         = request.form.get("razon", "")
-    zona          = request.form.get("zona", "")
-    fecha_entrega = request.form["fecha_entrega"]
-    nota          = request.form.get("nota", "")
+    # "cliente" ahora es el NOMBRE del cliente; "numero_cliente" es su número.
+    numero_cliente = request.form.get("numero_cliente", "").strip()
+    cliente        = request.form["cliente"]
+    zona           = request.form.get("zona", "")
+    fecha_entrega  = request.form["fecha_entrega"]
+    nota           = request.form.get("nota", "")
 
     # El vendedor es quien está logueado; la administradora puede elegir.
     if es_admin():
@@ -707,8 +820,8 @@ def generar():
             alto_fila = 34
             top = y_nota - 6
 
-            celda(X_IZQ, top, mitad, alto_fila, "CLIENTE", cliente)
-            celda(X_IZQ + mitad, top, mitad, alto_fila, "RAZÓN SOCIAL", razon)
+            celda(X_IZQ, top, mitad, alto_fila, "N° DE CLIENTE", numero_cliente)
+            celda(X_IZQ + mitad, top, mitad, alto_fila, "NOMBRE DEL CLIENTE", cliente)
 
             top2 = top - alto_fila
             celda(X_IZQ, top2, mitad, alto_fila, "ZONA", zona)
@@ -826,8 +939,8 @@ def generar():
         "id":                id_pedido,
         "vendedor":          vendedor,
         "creado_por":        creado_por,
+        "numero_cliente":    numero_cliente,
         "cliente":           cliente,
-        "razon":             razon,
         "zona":              zona,
         "fecha_entrega":     fecha_entrega_fmt,
         "fecha_entrega_iso": fecha_entrega,
@@ -913,6 +1026,88 @@ def borrar_pedido(pid):
 
 
 # --------------------------------
+# COBRANZAS (vendedor y administradora)
+# Todos los usuarios (vendedores y administradora) ven y cargan todas.
+# --------------------------------
+
+@app.route("/cobranzas")
+@login_requerido
+def cobranzas():
+    return render_template(
+        "cobranzas.html",
+        lista=cobranzas_visibles(),
+        clientes=leer_clientes(),
+        dias_aviso=DIAS_AVISO_COBRANZA,
+        error=request.args.get("error", "")
+    )
+
+
+@app.route("/cobranzas/agregar", methods=["POST"])
+@login_requerido
+def cobranzas_agregar():
+    numero = request.form.get("numero_cliente", "").strip()
+    factura = request.form.get("factura", "").strip()
+    importe = parsear_importe(request.form.get("importe", ""))
+    vencimiento = request.form.get("vencimiento", "").strip()
+
+    cliente = buscar_cliente(numero)
+    if cliente is None:
+        return redirect("/cobranzas?error=cliente")
+    if not factura:
+        return redirect("/cobranzas?error=factura")
+    if importe is None:
+        return redirect("/cobranzas?error=importe")
+    try:
+        date.fromisoformat(vencimiento)
+    except ValueError:
+        return redirect("/cobranzas?error=vencimiento")
+
+    lista = leer_json("cobranzas.json", [])
+    lista.append({
+        "id": uuid.uuid4().hex[:8],
+        "numero_cliente": str(cliente.get("numero", "")),
+        "cliente": cliente.get("nombre", ""),
+        "factura": factura[:40],
+        "importe": importe,
+        "vencimiento": vencimiento,
+        "cobrada": False,
+        "creado_por": session["usuario"],
+        "fecha_carga": ahora().strftime("%d/%m/%Y %H:%M")
+    })
+    guardar_json("cobranzas.json", lista)
+    return redirect("/cobranzas")
+
+
+@app.route("/cobranzas/<cid>/cobrada", methods=["POST"])
+@login_requerido
+def cobranzas_cobrada(cid):
+    lista = leer_json("cobranzas.json", [])
+    for c in lista:
+        if c.get("id") == cid and puede_ver_cobranza(c):
+            c["cobrada"] = not c.get("cobrada", False)
+            if c["cobrada"]:
+                c["cobrada_por"] = session["usuario"]
+                c["fecha_cobro"] = ahora().strftime("%d/%m/%Y %H:%M")
+            else:
+                c.pop("cobrada_por", None)
+                c.pop("fecha_cobro", None)
+    guardar_json("cobranzas.json", lista)
+    return redirect("/cobranzas")
+
+
+@app.route("/cobranzas/<cid>/borrar", methods=["POST"])
+@login_requerido
+def cobranzas_borrar(cid):
+    lista = leer_json("cobranzas.json", [])
+    nuevas = [
+        c for c in lista
+        if not (c.get("id") == cid and puede_ver_cobranza(c))
+    ]
+    guardar_json("cobranzas.json", nuevas)
+    return redirect("/cobranzas")
+
+
+# --------------------------------
 # PANEL DE ADMINISTRADORA
 # --------------------------------
 
@@ -920,6 +1115,60 @@ def borrar_pedido(pid):
 @admin_requerido
 def admin():
     return render_template("admin.html", seccion="inicio")
+
+
+# ---- Clientes (número + nombre) ----
+
+@app.route("/admin/clientes")
+@admin_requerido
+def admin_clientes():
+    return render_template(
+        "admin.html",
+        seccion="clientes",
+        clientes=leer_json("clientes.json", [])
+    )
+
+
+@app.route("/admin/clientes/agregar", methods=["POST"])
+@admin_requerido
+def admin_cliente_agregar():
+    numero = request.form.get("numero", "").strip()
+    nombre = request.form.get("nombre", "").strip()
+    if not numero or not nombre:
+        return redirect("/admin/clientes?error=vacio")
+    if buscar_cliente(numero) is not None:
+        return redirect("/admin/clientes?error=duplicado")
+    clientes = leer_json("clientes.json", [])
+    clientes.append({"numero": numero, "nombre": nombre})
+    guardar_json("clientes.json", clientes)
+    return redirect("/admin/clientes?ok=1")
+
+
+@app.route("/admin/clientes/<int:i>/guardar", methods=["POST"])
+@admin_requerido
+def admin_cliente_guardar(i):
+    clientes = leer_json("clientes.json", [])
+    numero = request.form.get("numero", "").strip()
+    nombre = request.form.get("nombre", "").strip()
+    if 0 <= i < len(clientes) and numero and nombre:
+        # No permite repetir un número que ya tiene otro cliente.
+        for j, c in enumerate(clientes):
+            if j != i and str(c.get("numero", "")).strip().lower() == numero.lower():
+                return redirect("/admin/clientes?error=duplicado")
+        clientes[i]["numero"] = numero
+        clientes[i]["nombre"] = nombre
+        guardar_json("clientes.json", clientes)
+    return redirect("/admin/clientes?ok=1")
+
+
+@app.route("/admin/clientes/<int:i>/borrar", methods=["POST"])
+@admin_requerido
+def admin_cliente_borrar(i):
+    clientes = leer_json("clientes.json", [])
+    if 0 <= i < len(clientes):
+        clientes.pop(i)
+        guardar_json("clientes.json", clientes)
+    return redirect("/admin/clientes?ok=1")
 
 
 # ---- Productos ----
